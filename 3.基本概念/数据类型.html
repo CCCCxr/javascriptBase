@@ -6,11 +6,27 @@
 </head>
 <body>
 <!--
-    
+    JavaScript 数据类型：
 
+    ECMAScript中，有5种简单的数据类型，也称为基本数据类型：Undefined、Null、Boolean、Number、String.
+    还有一种复杂的数据类型--Object.Object本质上是由一组无序的名值对组成的。
+    ECMAScript不支持任何创建自定义类型的机制，而所有的值都是上诉的6中之一。
+
+    typeof 操作符
+    使用typeof 操作符来检测数据的类型，它将返回下列中的字符串
+
+    "undefined" -- 如果这个值未定义；
+    "boolean" -- 如果这个是值是布尔类型的；
+    "string" -- 如果这个值是字符串；
+    "number" -- 如果这个值是数值；
+    "object" -- 如果这个值是对象或者NULL；
+    "function" -- 如果这个值是函数；
  -->
 <script>
-
+    var message = "hi";
+    alert(typeof message);  //"string"
+    alert(typeof (message)); // "string"
+    alert(typeof 95); // "number"
 </script>
 </body>
 </html>
