@@ -60,6 +60,17 @@
         isNaN()函数，用来判断传入的参数是否“不是数值”，如果不是数值返回true ,是数值返回false；
 
         有3个函数可以进行数值转换 Number(),parseInt()和parseFloat()。
+
+    String:
+        字符串类型，单引号和双引号都是有效的。
+        转义字符 ，以反斜杠开头， 被当做一个字符来解析。
+        值不能改变的，创建时候怎么样就是怎么样的。
+        toString（） 字符串转换函数 ，除开null和undefined以外，其他数据类型都有toString方法。
+         String() ，在不知道值是不是null和undefined的情况下，可以使用，如果不是null和undefinde的情况则调用toString方法，
+         如果是null返回nuLl，undefined返回undefined；
+
+   Object ：
+        通过new操作符加对象名字来创建 ： var o = new Object(); ,如果不传递参数可以省略括号。
  -->
 <script>
   //  var message = "hi";
@@ -96,7 +107,51 @@
     var num3 = Number("000011"); //11
     var num4 = Number(true); //1
 
+  //parseInt()
+    var num5 = parseInt("123456bule"); //123456
+    var num6 = parseInt("") ; //NaN
+    var num7 = parseInt("0xA"); //10(十六进制数)
+    var num8 = parseInt(22.5); //22
+    var num9 = parseInt("070"); //56(八进制数)
+    var num10 = parseInt("70"); //70 （十进制数）
+    var num11 = parseInt("0xf"); // 15(十六进制数)
+    var num12 = parseInt("0xAF",16);//  175 可以设置第二个参数来设置转换时候用的进制。
+    var num13 =parseInt("AF",16); //175 也可以忽略他的前导数。
 
+    // parseFloat
+
+    var fl1 = parseFloat("123456blue"); //与parseInt一样，只返回数字  123456
+    var fl2 = parseFloat("0xA"); // 0  直解析10进制数
+    var fl3 = parseFloat("22.5"); // 22.5
+    var fl4 = parseFloat("22.5.14"); // 22.5 只解析第一个小数点的数字
+    var fl5 = parseFloat("0908.5"); //908.5
+    var fl6 = parseFloat("3.125e7"); // 31250000
+
+    //String
+
+    var lang = "Java";
+    lang = lang+"script"; // 创建一个新的lang,然后填充原来lang的内容和字符script ,在销毁原来的lang和script
+    console.log(lang); //javascript
+      // toString()
+    var age = 23 ;
+    var ageString = age.toString(); //字符串“11”
+    var found = true;
+    var foundString = found.toString(); //字符串 “true”
+     var numst = 10 ;
+    console.log(numst.toString()); //"10"
+    console.log(numst.toString(2)); // "1010"，可以通过传递参数来输出以二进制，八进制，十六进制和其他有效进制表示的字符串
+
+    // Object 类型，天生自带5个方法 ：
+
+    /*
+    * constructor :构造函数，保存着用于创建当前对象的函数。 var o = new Object() ,它的构造函数就是Object().
+    * hasOwnProperty(propertyName):用于检查传递的属性名字在当前对象实例（而不是在实例的原型中）是否存在，参数要以字符串的形式。
+    * isPrototypeOf(Object);用于检查传入的对象是不是当前对象的原型。
+    * propertyIsEnumerable(propertyName): 用于检查给的属性能不能使用for-in语句来枚举。
+    * toLocaleString();返回对象的字符串表示，该字符串与执行环境的地区对应。
+    * toString();
+    * valueOf();返回对象的字符串，数值或布尔值表示。
+    * */
 </script>
 </body>
 </html>
