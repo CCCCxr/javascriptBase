@@ -21,12 +21,82 @@
     "number" -- 如果这个值是数值；
     "object" -- 如果这个值是对象或者NULL；
     "function" -- 如果这个值是函数；
+
+
+    undefined:
+      undefined类型只有一个特殊的值undefined。在使用var声明变量的时候但是未对其初始化的时候，这变量的值就是undefined。
+
+    null:
+      与undefined一样，null类型也是只返回一个特殊的值null.null值表示一个空对象指针，这也是为什么用typeof检测是时候会返回object
+      如果创建的变量准备在将来用于保存对象的话，那么最好将该值初始化为null，这样只要检测该值就能知道相应的变量是否保存了一个变量的引用。
+      undefined值是派生自null值的，因此ECMA-262规定它们的相等型测试返回true；
+      在保存对象的变量还没真正的保存对象的时候，应该明确的让他保存null值，这样可以有助与区别null和undefined；、
+
+    Boolean：
+       只有2个值 一个true ,一个false.字面值区分大小写，所以True这种类型的混合大小写形式的不是Boolean类型，只是标识符。
+       true可以被转换成数值1，false可以被转换成数值0
+
+       通过调用Boolean()这个转型函数，就能将其转化为Boolean类型的数据：
+
+       String 任何非空字符串转化为true,空字符串转化为false.
+       Object 任何对象转化为true，null转化为false.
+       Number 任何非0数字值，包括无穷大 转化为true，0和NaN转化为false
+       Undefined  只有false
+
+       当使用控制流语句（如if之类的）会自动执行Boolean转换。
+
+    Number:
+       根据不同的数值类型，ECMA-264定义了不同的数值字面量格式：
+       var intNum = 55 //十进制整数，也是最基本的数值字面量。
+       var octalNum1 = 070;  //八进制的56，
+       var octalNum2 = 079； //无效的八进制数值，所以忽略了前导0，后面的数值转成十进制，
+       十六进制字面值前俩位必须是0x，后面跟的字母a~f可以大写也可以小写；
+       在进行算数计算时，所有的八进制和十六进制表示的数值最终都会转化为十进制。
+
+       浮点数值在计算时会出现误差，例如0.1+0.2不等于0.3，而是等于0.30000000000004。
+       由于内存的限制，JS并没有保存所有的数值，最小的值是5e-324,最大值为1.7976931348623157e+308,如果超过这个范围返回Infinity
+
+        NaN,是一个特殊的数值，这个数值用来表示一个将要返回数值的操作并未返回数值.
+        isNaN()函数，用来判断传入的参数是否“不是数值”，如果不是数值返回true ,是数值返回false；
+
+        有3个函数可以进行数值转换 Number(),parseInt()和parseFloat()。
  -->
 <script>
-    var message = "hi";
-    alert(typeof message);  //"string"
-    alert(typeof (message)); // "string"
-    alert(typeof 95); // "number"
+  //  var message = "hi";
+ //   alert(typeof message);  //"string"
+ //  alert(typeof (message)); // "string"
+ //   alert(typeof 95); // "number"
+ //   alert(typeof null); //"object"  ,因为特殊值null被认为是一个空的对象引用。
+
+  //  var message;
+  //  alert(message == undefined); //true
+ //   var age
+ //   alert(age)   // undefined  解析器自动加上了分号所以变成了undefined，但实际是报错的。
+
+    //使用typeof 测试age和message俩个变量，数据类型返回的都会是undefined。
+
+
+    var car = null;
+  //  alert(typeof car); //"object"
+
+    var a = "hello world";
+   // if(a){   //变量a进行了Boolean转换，当转换的值为true时,执行alert语句。
+  //      alert("值是true")
+  //  }
+
+
+    alert(isNaN(a));  //true
+    alert(isNaN(10)); //false
+    alert(isNaN("10"));  //false,在转换的时候字符串10可以转化为数值10
+    alert(isNaN(true));  //false,ture可以被转换成1；
+
+    // Number()
+    var num1 = Number("hello");  // NaN
+    var num2 = Number(" ") ; //0
+    var num3 = Number("000011"); //11
+    var num4 = Number(true); //1
+
+
 </script>
 </body>
 </html>
