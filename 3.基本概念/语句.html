@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    //if语句
+    var i = 23;
+    if(i>25){  //括号内的表达式求值结果如果是true 则执行上面的代码块,如果为false就执行else里面的代码块
+        console.log("超过25岁啦")
+    }else{
+        console.log("还没25岁")
+    }
+    //也可以在添加多个if进行多种判断
+    if(i>25){
+        console.log("超过25岁啦")
+    }else if(i<30){
+        console.log("还没30岁")
+    }else{
+        console.log("到底几岁呢")
+    }
+    //do-while语句  是一种后测试循环语句,也就是会先执行代码块一次,然后在进行判断,如果条件为true,则在进行循环
+       //直到不满足条件停止循环.
+    do{
+        i+=2;
+    }while(i<30);
+    console.log(i);
+    //while语句 属于先循环语句,与do-while相反.
+    while(i>25){
+        console.log("我终于超过25岁了");
+        i--
+    }
+
+    //for 语句
+    for(var i2 = 0;i2 < i;i2++){
+        console.log(i2); //输出0到24
+    }
+    // for-in  迭代语句,可以枚举对象的属性. 如果要迭代的对象值是null或者undefined,那么ES3会报错,ES5会停止循环
+    for(var propName in window){
+        document.write(propName+"<br>");   //将BOM对象的属性遍历了出来
+    }
+    // label语句   在代码中添加标签,以便将来使用,
+    start:for(var a=0;a<i;a++){
+        console.log(a);
+    }
+    //break 和 continue语句
+    var num=0 ;
+//    for(var b=1;b<10;b++){
+//        if( b %5 ==0){
+//            break
+//        }
+//        num++
+//    }
+    console.log(num);  //4 循环了4次,  如果if语句检查到i的值能被5整除,那么久使用break跳出循环.
+    for(var c=1;c<10;c++){
+        if( c %5 ==0){
+            continue
+        }
+        num++
+    }
+    console.log(num);  //8 循环了8次.因为当i满足能被5整除时,就会跳出当前循环,然后接着下一次循环
+
+    var num2=0;
+    var num123=0;
+    out:
+            for(var  n=0 ;n<10; n++){
+                for(var j=0;j<10;j++){
+                    if(n==3&&j==6){
+                        break out;
+                    }
+                    ++num2;
+                }
+            }
+    console.log(num2);
+    //with语句 : 将代码的作用域设置到一个特定的对象中 ,主要的作用就是简化多次编写同一个对象的工作.
+      // 严格模式下不允许使用with语句,否则会报错.大量使用with语句会导致性能下降,所以开发大型应用时,不建议使用
+    var qs = location.substring(1);
+    var hostName = location.hostname;
+    var href= location.url;
+       //使用with语句简写:
+    with (location){
+        var qs = search.substring(1);
+        var hostName = hostname;
+        var url =href;
+    }
+    //switch 语句
+        switch (i){
+            case 25:
+                console.log("25");
+                break;
+            case 35:
+                console.log("35");
+                break;
+            default :   //不匹配上面的所有case条件的时候 执行default
+                console.log("其他情况")
+        }
+</script>
+</body>
+</html>
