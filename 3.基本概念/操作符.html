@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+    /*
+    *  操作符：一元操作符.只能操作一个值的操作符。
+    *        位操作符，
+    *
+    * */
+    // 递增操作符与递减操作符
+    var age = 29;
+    var age2 = 29;
+    ++age; //30  前置形递增
+    --age2; //28 前置形递减
+    var age3 = 29;
+    var age4 = --age3+2;
+  //  console.log(age3);  //28,因为在赋值age4的时候被递减了
+  //  console.log(age4); // 30 ，
+
+    var num1 =2;
+    var num2 =20;
+    var num3 = --num1+num2;
+    var num4 = num1+num2;
+  //  console.log(num3); //21 ,因为先进行--操作所以num1变成了21
+  //  console.log(num4); //21 ，使用的num1是上面已经递减过的num1的值
+
+    var agea = 29;
+    agea++;   //30 后置型递增
+    var a1 = 2;
+    var a2 = 20;
+    var a3 = a1-- + a2;
+    var a4 = a1+a2; //21
+  //  console.log(a3);  // 22，语句被求值之后才发生的递减操作
+  //  console.log(a4); //21，所以a4是21
+    //递增操作别的数值类型
+//
+//    var s1 = "2";
+//    var s2 = "z";
+//    var b = false;
+//    var f = 1.1;
+//    var c = {
+//        valueOf: function () {
+//            return 1;
+//        }
+//    };
+//    console.log("字符串2 "+s1++); //值变成数值3
+//    console.log("字符串z "+s2++); //值变成NaN
+//    console.log("布尔类型 "+b++); // 值变成1；
+//    console.log("浮点数 "+f--); //值变成0.100000b0000000000009（由于浮点书错误导致）
+//    console.log("对象 "+c--);  //对象就调用valueOf方法;
+    //对非数值类型应用一元操作符的时候，会像Number()对值进行转换
+    var s1 = "2";
+    var s2 = "1.1";
+    var b = false;
+    var f = 1.1;
+    var obj1 = {name: "obj1"};
+    var obj2 = {name: "obj2"};
+    s1 = +s1 ; //数值1;
+    s2 = +s2 ; //数值1.1；
+
+    b  = +b ; //数值0；
+    f  = +f ; //不变，还是1.1
+    //一元减主要是用来负数转换,应用于非数值与一元加一样，只是最后在得到的值转为负数。
+    var numj = 25;
+    numj = -numj ; //-25
+
+    //位操符
+    console.log(~25); // 按位非
+    console.log(25&3); //按位与
+    console.log(25|3); //按位或
+    console.log(25^3); //按位异或
+    //布尔操作符
+
+        //逻辑非：！  将返回的布尔值在进行求反操作
+        console.log(!false); //true,
+        //逻辑或：&  只要俩个数值的真值都不是true，就会返回false。只有俩个俩个数值的真值都是true,才会是true,如果有一个操作数是null.NaN,undefined,就是它本身
+                //如果第一个数能决定结果，就不会在对第二个数求值。如果第一个操作数是false，那么结果只会是false
+        console.log(s1&&s2) ; //
+        console.log(obj1 && obj2);   //都是对象 就返回第二个
+        console.log(true && obj2);  //返回 obj2
+        console.log(obj2 && true);  //返回 true
+
+        //逻辑或：||    只要那个数值的真值都不是true,就返回false。其他都返回true。如果第一个值得结果是true，那么就不会考虑第二个了。
+                    //如果俩个操作数都是null，NaN，undefined,那就返回它本身
+        console.log(obj1 || true);  //第一个操作数是对象就返回第一个。
+        console.log(false || obj2); // 如果第一个操作数返回的是false，那就直接返回第二个
+        console.log(obj1 || obj2);  //返回第一个对象
+
+    //乘法操作符 * ；除法操作符/  余数操作符 % ；
+
+    //加法操作符 ：如果俩个操作符是数值，则进行加法计算。
+        var count1 = 1+2; // 3
+        var count2 = 1+NaN ; //NaN
+        var count3 = Infinity+Infinity; // Infinity
+        var count4 = -Infinity + -Infinity; //  -Infinity
+        var count5 = -Infinity + Infinity; // NaN ;
+        // 如果其中一个操作数或者俩个全是字符串，会将他们拼接起来；
+        var count6 = 1+"asd"; //"1asd"
+        var count7 = "xv"+"asd"; //"xvasd"
+    //减法操作符
+        var result = 5-true;  //4 ,true被转换为了1。
+        var result2 = NaN -1 ; // NaN
+    //关系操作符
+        //大于(>)，小于(<)，等于(=) ,大于等于（>=），小于等于(<=)
+        // 这几个操作符都返回布尔值。如果操作数其中有一个不是数值还会进后台转换。
+    //相等操作符 相等（==）与全等（===）
+        // 相等是先转换在比较 。全等是仅比较而不转换
+    //条件操作符 ？ true:false
+    var max = (num1>num2) ? num1:num2;  // 如果比较的结果是true，则max的值是num1, 如果是false，则是num2
+    //赋值操作符  = 组合赋值 +=，-=，*=····
+    var num10 = 10;
+    num+=10;  // num= num+10
+    num*=10;  // num = num*10
+    // 逗号操作符 ，
+    var z1= 1,z2= 3,z3=4;
+    var p = (5, 4 , 3 , 2, 1);  //p取最后一个值
+</script>
+</body>
+</html>
