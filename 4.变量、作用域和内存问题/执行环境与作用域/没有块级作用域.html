@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /**
+     * JS里面与其他语言不通，在其他类C语言中 由花括号封闭起来的代码都有自己的作用域。但js没有
+     *
+     */
+    if(true){
+        var color = "red";
+    }
+    console.log(color); // "red"   在if语句中声明的变量会被添加到最近的变量中；所以color变量被添加到了全局变量中；
+                                    //而不是在运行完毕后销毁
+
+    /**
+     * 声明变量的时候，变量会被加入到最接近的环境中。
+     * 没有使用var声明的变量会自动加到全局变量中。
+     */
+
+    /**
+     * 查询标识符 ： 搜索过程从作用域链的前端开始，向上逐级查询，如果在局部找到就停止，如果没有就继续向上，知道追溯到全局环境。
+     *              如果没找到则表示该变量未声明。
+     *
+     */
+     var color = "red";
+    function getcolor(){
+        var color = "blue";
+        return color;
+    }
+    console.log(getcolor());  //"blue" ,因为在局部环境中找到了变量color，那么久不会再上级查找
+</script>
+</body>
+</html>

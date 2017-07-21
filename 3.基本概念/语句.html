@@ -8,7 +8,7 @@
 <script>
     //if语句
     var i = 23;
-    if(i>25){  //括号内的表达式求值结果如果是true 则执行上面的代码块,如果为false就执行else里面的代码块
+    if(i>25){  //括号内的表达式求值结果如果是true 则执行后面的代码块,如果为false就执行else里面的代码块
         console.log("超过25岁啦")
     }else{
         console.log("还没25岁")
@@ -34,7 +34,7 @@
     }
 
     //for 语句
-    for(var i2 = 0;i2 < i;i2++){
+    for(var i2 = 0; i2 < i; i2++){
         console.log(i2); //输出0到24
     }
     // for-in  迭代语句,可以枚举对象的属性. 如果要迭代的对象值是null或者undefined,那么ES3会报错,ES5会停止循环

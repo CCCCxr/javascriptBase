@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /**
+     *   参数传递
+     *      参数传递根据顺序按值传递的，也就是等于把函数外部的值复制给内部的参数；
+     */
+    function sum(num){
+        num+=10;
+        return num
+    }
+    var a= 10;
+    var b = sum(a);
+    console.log(a);
+    console.log(b); //与复制变量一样，传递基本类型的变量a进去，相等于复制变量a给局部变量num，所以改变a的值并不会改变num
+
+    var person = new Object();
+    function setName(obj){
+        obj.name="chenxr"
+    }
+    setName(person);
+    console.log(person.name); //“chenxr”  传递引用类型的变量，在函数内部改变了，外部也发生改变
+
+    /**
+     * 检测类型
+     *     typeOf 操作符只能检测非对象和非null的数据。
+     *     instanceOf 如果给的数据类型是对象或者null那么就要用到instanceOf操作符了
+     */
+
+        console.log(person instanceof Object);  //是返回true
+        console.log(a instanceof Object);  // 不是引用类型的返回false
+
+</script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /*
+    * 函数 ,用关键字function声明，后面跟一组参数,然后使用函数体，参数有多个使用逗号隔开
+    */
+    function fun(arg0,arg1){
+        console.log(arg0)
+    }
+    function fun2(name,message){
+        console.log("hello"+name+","+message)
+    }
+    fun2("chen","how are you"); //调用函数，并且传入参数；
+    //使用return 关键字来实现返回值  return之后也可以不用带返回值，这样会停止函数并返回undefined
+    function sum(num1,num2){
+        return num1+num2;
+        alert("aaa"); /// return之后的语句不会执行
+    }
+    function diff(num1,num2){  //可以拥有多个return
+        if (num1>num2){
+            return num1
+        }else {
+            return num2
+        }
+    }
+    var result = sum(3,5); //8
+    /*
+    * 函数中的参数；无论传几个参数或者不传参数都不会有错误，因为它使用一个数组来表示，可以在函数体里面通过argument对象来访问这个参数组。
+    * 通过访问argument的length属性来获取参数的个数,可以根据传入的参数不同来处理不同的情况。
+    * 同名函数只有位置在后面的那个生效
+    */
+    function fun3(name,message){
+        console.log("hello"+arguments[0]+","+arguments[1]);
+        console.log(arguments.length);
+    }
+
+    function arg() {
+        var leng = arguments.length;
+        if (leng ==1){
+            console.log('1个参数')
+        }else if (leng == 2){
+            console.log('2个参数')
+        }else {
+            console.log('多个参数')
+        }
+    }
+    fun3(" c","w");
+    arg(1,2,3,4)
+</script>
+</body>
+</html>

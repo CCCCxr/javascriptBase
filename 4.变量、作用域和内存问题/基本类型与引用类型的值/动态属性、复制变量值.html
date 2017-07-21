@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /*
+    *   ECMAScript 创建变量的时候根据保存的数据类型来确定是基本类型值还是引用类型值。
+    *           基本类型是undefined null string number boolean
+    *           引用类型是保存在内存中的对象。在操作对象的时候，是在操作对象的引用，所以引用类型的值是按照引用来访问的。
+    */
+
+    //对于引用类型的值 我们可以对它进行增、删、改他们的方法和属性 ，
+    var person = new Object();
+    person.name="chenxueru";
+    console.log(person.name);   //如果对象不被销毁或者这个属性不在删除。那么这个属性会一只存在、
+    //但是基本类型的值，给它们定义属性是无效的；
+
+
+
+    // 复制变量值
+        //复制基本类型的值
+        var num1 =20;
+        var num2 = num1;  //num2复制了num1的值，但是它们俩个之间是互相不受影响的
+        // 复制引用类型的值
+        var cxr = new Object();
+        cxr.name="chenxueru";
+        var cxr2=cxr;
+        console.log(cxr2.name);  //在复制一个引用类型的值得时候，也会将复制对象的值放到新变量的分配空间中，只不过这个值是一个指针。
+                                 //复制结束后，俩个变量其实指向的是同一个对象，所以改变其中一个对象就会影响另外一个对象。
+</script>
+</body>
+</html>
