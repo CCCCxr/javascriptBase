@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /**
+     *   引用类型的值就是引用类型的一个实例。
+     */
+   // var person = new Object();  //创建了Object引用类型的一个实例，然后将实例存在变量person中，构造函数是Object.
+
+    //Object类型，创建Object的类型有俩种，
+    var person = new Object(); //使用new加Object构造函数。
+    person.name="cxr";
+    person.age=25;
+
+    var person2 = {  //使用对象字面量表示法创建，使用这个方法创建的时候则不会调用Object的构造函数
+        name:"cxr",
+        age: 25
+    };
+    //对象字面量表示法也是向函数中传递大量可选参数的首选方式
+    function dispalyInfo(args){
+        var output="";
+        if(typeof args.name == "string"){
+            output+="Name:"+args.name+"\n";
+        }
+        if(typeof args.age == "number"){
+            output+= "Age:"+args.age+"\n";
+        }
+        console.log(output);
+    }
+
+    dispalyInfo({
+        name:"cxr",
+        age : 25
+    });
+    dispalyInfo({
+       name : "cxr2"
+    });
+
+    //点表示法
+    console.log(person.name); //"cxr"
+    //方括号表示法
+    console.log(person["name"]);//"cxr"
+    var name = "name";
+    console.log(person[name]);//"cxr",也可以在方括号里面使用变量
+    //如果属性名中包含会导致语法错误的字符，或者属性名是关键字和保留字，也可以使用方括号表示法
+    person["first name"]="chen";
+
+</script>
+</body>
+</html>
