@@ -137,17 +137,52 @@
     }
     console.log(sayName.length); // 1
 
-    //每个函数都包含俩个非继承而来的方法：apply()和call()。
-    //用途都是在特定的作用域中调用函数，实际上等于设置函数体内的this对象的值
-
+    /*每个函数都包含俩个非继承而来的方法：apply()和call()。
+     *用途都是在特定的作用域中调用函数，实际上等于设置函数体内的this对象的值
+     * 使用哪种取决于采取哪种给函数传递参数的方式最方便,如果直接传arguments对象或者包含函数中先接受到的也是一个数组
+     * 就使用apply(),否则就使用call()
+     *  apply()与call()真正的强大的地方是能够扩种函数赖以运行的作用域.
+     *
+     *
+     */
     function sumA(num1,num2){
         return num1+num2;
     }
+    function callSum1(num1,num2){
+        return sumA.apply(this,arguments); //可以穿arguments对象,
+    }
+    function callSum2(num1,num2){
+        return sumA.apply(this,[num1,num2]);  //也可以直接传数组
+    }
+    // 在使用call方法的时候要明确地传入每一个参数.
     function  callSum(num1,num2){
         return sumA.call(this,num1,num2);
     }
 
     console.log(callSum(10,10));  //20
+
+    window.name="cxr";
+    var b = {name:"chen"};
+    function myName(){
+        console.log(this.name); // 全局函数,this指的是windows
+    }
+   //使用call()与apply()来扩充作用域. 最大的好处就是对象不需要与方法有任何的耦合关系,
+    //这样不用和上面一样将函数放到对象里面就可以直接获取对象中国的name属性的值
+    myName(); //cxr
+    myName.call(this); //cxr  显示的在全局作用域中调用函数
+    myName.call(window); //cxr  显示的在全局作用域中调用函数
+    myName.call(b);// chen 因为将对象o也放入到了myName函数的作用域中.
+
+    //bind()方法. 会创建一个函数的实例,其this值会被绑定到传给bind()函数的值;
+    window.age  = 23;
+    var a = {age:24};
+    function myAge(){
+        console.log(this.age);
+    }
+    var bindMyAge = myAge.bind(a);
+    bindMyAge();  //24
+    //每个函数继承的toLocaleString()和toString()方法始终都会返回函数的代码.valueOf也一样.
+
 </script>
 </body>
 </html>
