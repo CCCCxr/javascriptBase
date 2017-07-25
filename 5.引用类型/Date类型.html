@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    /**
+     * 日期对象  Date类型
+     */
+    var now = new Date(); //创建一个新的日期对象,如果不往构造函数Date()里面传参数,则自动获取当前的日期和时间
+                          //如果要设定制定的日期和时间则可以传入时间戳来获取.
+                          //ECMAScript提供了俩个方法 Date.parse()和Date.UTC()
+    var someDate  = new Date(Date.parse("May 25,2004"));  //如果方法的字符串不能表示日期则返回NaN;
+    console.log(someDate);  //Tue May 25 2004 00:00:00 GMT+0800 (中国标准时间)
+    //也可以简写,效果是一样的
+    var someDate  = new Date("May 25,2004");
+    console.log(someDate);
+    // Date.UTC() 它的参数分别是年份,基于0的月份,月中的哪一天,小时数,分钟,秒,毫秒.前面俩个参数是必须的.
+    // 如果没有提供月中的天数,则假设为1,如果省略其他参数,则统统假设为0;
+    var y2l = new Date(Date.UTC(2000,0));  //GMT时间2000年1月1日0点0分0秒
+    var allFives = new Date(Date.UTC(2005,4,5,17,55,55));//GMT时间2005年5月5日17点55分55秒.
+    //和Date.parse一样可以使用简写,但是不同的是日期和时间都基于本地而不是GMT.接收的参数还是一样的
+    var y2l = new Date(2000,0);  //本地时间2000年1月1日0点0分0秒
+    var allFives = new Date(2005,4,5,17,55,55);//本地时间2005年5月5日17点55分55秒.
+    //Date.now  返回表示调用这个方法时候的日期和时间的毫秒数.
+    var start = Date.now();//获得开始时间
+    doSomething(); //调用函数来做一些操作````
+    var stop = Date.now(),
+        result = stop -start; //运行函数的时候花了多少时间.
+
+
+</script>
+</body>
+</html>

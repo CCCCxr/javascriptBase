@@ -151,8 +151,18 @@
         //需要执行的操作
     });
 
-    //缩小方法  ECMAScript5新增俩个缩小方法 reduce()和reduceRight() ,迭代数组所有项，构建一个最终返回的值。
 
+    //归并方法  ECMAScript5新增俩个缩小方法 reduce()和reduceRight() ,迭代数组所有项，构建一个最终返回的值。
+     // reduce()从数组第一项开始,reduceRight()则相反
+    // 俩个方法都接收俩个参数:在每一项调用的函数和作为归并基础的初始值,传给他们的函数接收4个参数
+    //(前一个值,当前值,项的索引,数组对象)
+    var sum = numbers.reduce(function(prev,cur,index,array){
+        return prev+cur;
+    });
+    console.log(sum);  //25
+    //第一次执行的时候,prev是1,cur是2,第二次prev是3(前俩项之和),cur是3(数组第三项),这个过程持续到把数组中每个
+    //项都访问一遍,最后返回结果25.
+    //reduceRight则是从相反的位置开始遍历,除此之外,它们完全相同.
 
 </script>
 </body>
