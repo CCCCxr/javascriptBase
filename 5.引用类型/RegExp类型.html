@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /**
+     * RegExp类型  ECMAScript 通过RegExp类型来支持正则表达式
+     *    使用类似于Perl的语法，就可以创建一个正则表达式
+     *    var exp = /pattern/flags  pattern部分可以是任何简单或者复杂的正则表达式，每个正则可以带一个或多个表示(flags)，用来表示正则的行为。
+     */
+    var pattern1 =/at/g;  //匹配字符串中所有"at"的实例， g是标识符，代表全局模式，即应用于所有字符串，而非发现第一个的时候停止。
+    var pattern2 = /[bc]at/i; // 匹配第一个bat或者cat，i表示不区分大小写。
+    var pattern3= /.at/gi; //匹配所有已at结尾的3个字符的组合，不区分大小写
+
+    //模式中使用的所有元字符都必须转义,也就是碰到元字符就要加转义字符转义。 /[bc]a/i   =>    /\[bc\]a/i
+    // 正则中的元字符包括：( [ { \ ^ $ | ) ? * + . ] }
+
+    var pattern4 = /\[bc\]at/i;   //字面量形式来定义的。
+    var pattern5 = new RegExp("\\[bc\\]at","i"); //使用构造函数来定义，接受俩个参数：一个是要匹配的字符串模式，另一个是可选的标志字符串。
+                                                 //要使用双重转义。
+
+    var re=null,
+            i;
+    for (i=0;i < 10; i++){
+        re = /cat/g;
+        re.test("catastrophe");  //只有第一次是true，其他都是false ，因为只创建了一个RegExp实例。
+    }
+    for (i = 0; i < 10; i++){
+        re = new RegExp("cat","g");
+        re.test("catastrophe"); //每次都会创建一个新的实例，所以都是true。
+    }
+    //ECMAScript5规定使用字面量表达式都必须像调用RegExp构造函数一样，每次都创建新的实例
+    /**
+     * 实例属性。 RegExp的每个实例都具有一些属性，通过属性可以取得有关模式的信息
+     */
+    console.log(pattern4.global);  //布尔值，表示是否设置了g标志。
+    console.log(pattern4.ignoreCase);  //布尔值，表示是否设置了i标志。
+    console.log(pattern4.lastIndex);  // 0 整数，表示开始搜索下一个匹配项的字符位置，从0算起；
+    console.log(pattern4.multiline); //布尔值，表示是否有没设置m标志
+    console.log(pattern4.source);// \[bc\]at 正则表达式按字符串形式表示。
+
+    /**
+     * 实例方法 ： RegExp对象的主要方法是exec(),接受一个参数，目标的字符串
+     *           还有一个test()，接收一个字符串参数，如果匹配则返回true，否则返回false.
+     */
+    var text = "mom and dad and baby";
+    var pattern6 = /mom( and dad( and baby)?)?/gi;
+    var matches = pattern6.exec(text);
+    console.log(matches);  //返回数组实例，但是有额外的俩个参数，input表示传入的字符串，index表示匹配项在字符串的位置；
+
+    var text2= "000-00-0000";
+    var pattern7 = /\d{3}-\d{2}-\d{4}/;
+    var result = pattern7.test(text2);
+    console.log(result); // true
+
+    /**
+     * RegExp实例继承的toLocaleString()和toString()方法都只会返回正则表达式的字面量。
+     */
+</script>
+</body>
+</html>
