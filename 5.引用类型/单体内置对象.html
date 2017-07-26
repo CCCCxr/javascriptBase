@@ -16,7 +16,80 @@
     //Global对象：所有不属于任何其他对象的属性和方法，最终都是它的属性和方法。
     //没有全局变量和全局函数，所有在全局作用域中定义的属性和函数，都是Global对象的属性。
 
-    //URL编码方法
+    //URI编码方法  encodeURI()方法主要作用于整个URI , encodeURIComponent()方法主要作用于URI的某一段
+    var uri = "http://www.cxr.com/zxc aae f#cc";
+    console.log(encodeURI(uri));
+    //http://www.cxr.com/zxc%20aae%20f#cc 只对空格进行编码
+    var uri1 = "http://www.cxr.com/zxc%20aae%20f#cc";
+    console.log(encodeURIComponent(uri));
+    // http%3A%2F%2Fwww.cxr.com%2Fzxc%20aae%20f%23cc 对任何它发现的非标准字符编码
+    var uri2 = "http%3A%2F%2Fwww.cxr.com%2Fzxc%20aae%20f%23cc";
+    //  decodeURI() decodeURIComponent() ,与encodeURI()和encodeURIComponent()对应，
+    // 将编码过的字符进行解码
+    console.log(decodeURI(uri1));  //  http://www.cxr.com/zxc aae f#cc
+    console.log(decodeURIComponent(uri2));  //  http://www.cxr.com/zxc aae f#cc
+
+    //eval()方法  JavaScript中最强大的方法  一个参数：要执行的代码
+    //内执行的代码是包含该次调用的执行环境的一部分，该代码具有与该执行环境相同的作用域链。
+    // 意味着可以通过eval()执行的代码可以引用在包含环境中定义的变量。
+    // 在eval()中创建的任何变量或函数都不会被提升，它们只有在eval()运行时候才会创建。
+    // eval()在严格模式中会报错。
+
+   // eval("alert('hi')"); // 等价于 alert("hi");
+
+    var mas = "hello world";
+   // eval("alert(mas)");
+   //    eval("function sayHi(){ alert('hi') }");
+//    sayHi(); // 也可以在eval里面定义函数，包含环境中也可以直接访问，因为作用域链相同
+
+    //Global对象的属性，所有原生引用类型的构造函数都是Global对象的属性，例如Object,Function·····，还有特殊值undefined,NaN,Infinity.
+
+
+    //window对象，  在浏览器中，将Global对象作为window对象的一部分。所有在全局作用域声明的变量和函数，都成为了window对象的属性。
+     var color = "red";
+     function  sayColor(){
+         console.log(window.color);
+     }
+     window.sayColor();  //red；
+
+    var global = function(){
+        return this;
+    }();
+    console.log(global);  //返回window对象
+
+    //Math对象  用于保存数学公式和信息。
+    console.log(Math.PI); //3.141592653589793
+
+       // min()和max()方法  用于确定一组数值中的最大值和最小值
+    var max = Math.max(5,45,12,36,4) ;
+    console.log(max); //45
+    var min = Math.min(5,45,12,36,4) ;
+    console.log(min); //4
+
+    var array = [1,5,4,6,3,8,10,45] ;
+    var max1 = Math.max.apply(Math,array);
+    console.log(max1);  //45;
+
+
+     // 舍入方法  Math.ceil() ，Math.floor() ,Math.round()
+
+    console.log(Math.ceil(25.9));  //26 向上舍入，
+    console.log(Math.ceil(25.5)); //26
+    console.log(Math.ceil(25.1)); //26
+
+    console.log(Math.floor(25.9));  //25 向下舍入，
+    console.log(Math.floor(25.5)); //25
+    console.log(Math.floor(25.1)); //25
+
+    console.log(Math.round(25.9));  //26 四舍五入，
+    console.log(Math.round(25.5)); //26
+    console.log(Math.round(25.1)); //25
+
+
+    //random()方法  返回一个介于0~1之间的随机数，不包括0和1。
+    //值 = Math.floor(Math.random()*可能值得总数+第一个可能的值)
+    var num = Math.floor(Math.random()*10+1);
+    console.log(num); //返回1到10随机一个数  floor方法用于取整。
 </script>
 </body>
 </html>
