@@ -5,6 +5,153 @@
     <title></title>
 </head>
 <body>
+<script>
+    /**
+     * 为了方便操作基本类型值，ECMAScript提供了3个特殊的引用类型：Boolean,Number和String。
+     * 引用类型与基本包装类型的主要区别就是对象的生存周期。使用new操作符创建的引用对象实例，在执行流离开当前作用域之前都一只保存在内存中，
+     * 而自动创建的基本包装的对象，则只存在代码执行的一瞬间，然后立即被销毁，所以我们不能再运行的时候为基本类型值添加属性和方法。
+     * 理解基本类型的布尔值与Boolean对象之间的区别非常重要，但是建议永远不要使用Boolean对象。
+     *  Boolean对象重写了toString()和valueOf()方法， valueOf()返回基本类型值 true或者false，toString()返回字符串"true"或"false"。
+     */
+    var s1 ="test";
+  //  s1.color="red";
+  //  console.log(s1.color);  报错  undefined
+    var s2 = s1.substring(2);
+   //当运行到变量s2时候，访问过程会处于读取模式，后台会进行下列处理
+    var exps = new String("some text");
+    var exps2 = exps.substring(2);
+    exps = null;
 
+    /**
+     * Object构造函数也会像工厂方法一样，根据传入的值返回相应的基本包装实例。
+     */
+    var obj = new Object("some text");
+    console.log(obj instanceof String); //true
+
+    /**
+     * Boolean类型是与布尔值对应的引用类型。
+     * 创建一个Boolean对象，可以调用Boolean构造函数并传入true或false。
+     */
+    var booleanObject  = new Boolean(false) ;
+    var result1 = booleanObject && true ;
+    console.log(result1); //true ，因为对创建了对象引用的booleanObject求值，而不是对他的值求值，所以是true。
+
+    var boolean = false;
+    var result2 = boolean && true;
+    console.log(result2); //false
+
+    /**
+     * Number类型
+     * Number类型是与数字值对应的引用类型。创建Number对象，可以调用Number构造函数向其中传递相应的数值。
+     *   它也重写了valueOf(),toString(),toLocaleString()方法  。
+     *   与Boolean类型一样，Number类型也不建议直接实例化,因为在使用typeof和instanceof操作符测试基本类型与引用类型数值时，结果是不同的。
+     */
+    var numberObject = new Number(10);
+    var num = 10;
+    console.log(num.toString(2)); // "1010" ,可以传递表示基数的参数,告诉他返回几进制数值的字符串。
+    console.log(num.toFixed(2)); //"10.00"  ,根据传入的数值显示几位小数
+    var num2 = 10.005;
+    console.log(num2.toFixed(2)); // "10.01" 如果数值本身包含的小数比指定的还多，那么接近指定的最大小数位的值会舍入。
+    console.log(num.toExponential(1)) ; // "1.0e+1" 将传入的数值以指数表示法表示的数值的字符串形式返回。
+    console.log(num.toPrecision(1));  // toPrecision 会根据要处理的数值来决定调用toFixed()还是toExponential();
+
+    /**
+     * String类型是字符串对象的包装类型，使用String构造函数来创建,
+     * 继承的valueOf(),toString(),toLocaleString()方法都返回对象所表示的基本字符串值(也就是他本身)
+     */
+    var stringValue = new String("hello world");
+    console.log(stringValue.toLocaleString());
+    //String类型的每一个实例都有一个length属性，表示字符串中包含几个字符。
+    console.log(stringValue.length); //11  空格也算一个字符
+    //访问字符串中特定字符的方法：charAt()和charCodeAt()。都接收一个参数，基于0的字符位置。
+    console.log(stringValue.charAt(1)); //"e"
+    console.log(stringValue.charCodeAt(1));//"101" ,返回特定位置的字符的字符编码。
+    console.log(stringValue[1]);//也可以直接通过数组的形式直接访问特定位置的字符
+    // concat(),用于将一个或者多个字符串拼接起来，返回拼接之后的字符串,不过一般都使用+号拼接。
+    var stringValue2 = stringValue.concat("!");
+    console.log(stringValue2);//hello world!
+    /**
+     * 三个基于字符串创建新的字符串的方法 ： slice(),substr(),substring();
+     *    全都返回被操作字符的一个子字符串，而且都接收一个或者俩个参数。
+     *    第一个参数指定字符串开始的位置，第二个参数表示子字符串到哪里结束。
+     *    slice()和substring()的第二个参数指的是子子字符串最有一个字符的位置，substr()则是返回的字符个数。
+     *    如果没有传递第二个参数，则将字符串的长度作为结束位置。
+     *    他们不会修改本身字符串的值，只是返回一个新的基于被操作字符的基本类型的字符串值，
+     */
+    console.log(stringValue.slice(3)); //"lo world"
+    console.log(stringValue.substring(3)); //"lo world"
+    console.log(stringValue.substr(3));//"lo world"
+    console.log(stringValue.slice(3,7)); // "lo w" 第3个开始到第7个
+    console.log(stringValue.substring(3,7)); // "lo w"  第3个开始到第7个
+    console.log(stringValue.substr(3,7));//"lo worl" 第三个开始返回7个字符
+    // 传入负值的情况
+    console.log(stringValue.slice(-3)); //  "rld" 会将字符串的长度加上负值，实际上等于 slice(8);
+    console.log(stringValue.substring(-3)); // "hello world"  会把传入的负值转换成0
+    console.log(stringValue.substr(-3));//  "rld" 与slice的情况一样， substr(8)
+
+    console.log(stringValue.slice(3,-4)); // "rld" 将-4变成了7，等于调用了 slice(3,7),7是倒数过来的第4位。
+    console.log(stringValue.substring(3,-4)); // "lo w"，也将负值变为0，但是这个方法会吧较小的数作为开始位置，较大的数作为结束位置，所以这个方法就变成substring(0,3)
+    console.log(stringValue.substr(3,-4));// "" 将负值变成0，所返回的是空字符串
+
+    /**
+     * 字符串位置方法，indexOf()和lastIndexOf()。
+     *              indexOf()左边右，lastIndexOf()是右到左。如果没找到则返回-1;
+     *              设置俩个参数，第一个是要搜索的字符，第二个（可选）是从哪个位置开始搜索
+     */
+    console.log(stringValue.indexOf("o")); // 4 第一次出现的位置是4
+    console.log(stringValue.lastIndexOf("o")); //7 最后一次出现的位置是7
+
+    console.log(stringValue.indexOf("o",6)); // 7 第一次出现的位置是7 从位置6开始向后搜索
+    console.log(stringValue.lastIndexOf("o",6)); //4 最后一次出现的位置是4 ，从位置6开始向后搜索
+    //可以通过循环调用indexOf()和lastIndexOf()来找到所有匹配的字符串
+    var stringValue5 = "Lorem ipsaisdm ashdoaihsdwq asbfhjqw wueiofqwe dasdfwq";
+    var positions = [];
+    var pos = stringValue5.indexOf("q");
+    while (pos>-1){
+        positions.push(pos);
+        console.log(pos);
+        pos = stringValue5.indexOf("q",pos+1);
+    }
+    console.log(positions);
+
+    //trim()方法  删除字符串中前置及后缀的空格并返回它的副本
+    var a = "  1231  312 123  ";
+    var stringValue3 = a.trim();
+    console.log(stringValue3);
+    // 字符串大小写转换方法
+    console.log(stringValue.toLocaleLowerCase()); //hello world
+    console.log(stringValue.toLocaleUpperCase()); //HELLO WORLD
+    console.log(stringValue.toLowerCase()); //hello world  小写
+    console.log(stringValue.toUpperCase()); //HELLO WORLD  大写
+    // 字符串匹配方法  match(),与调用RegExp的exec()方法相同。 只接受一个参数，要么是正则表达式 ，要么是RegExp对象。
+    var text = "cat, bat, sat, fat";
+    var pattren = /.at/;
+    var matches = text.match(pattren);
+    console.log(matches);//返回的结果与pattren.exec(text) 是相同的
+
+    // search(),一个参数：目标字符串或正则表达式 返回第一次出现的位置
+    console.log(text.search(/at/));  //1
+    // replace() ,俩个参数：目标字符串或者正则，替换的字符串或者函数
+    var result =text.replace("at","ond");
+    console.log(result); //cond, bat, sat, fat  替换了第一个
+    var results = text.replace(/at/g,"ond");
+    console.log(results);  //cond, bond, sond, fond替换了所有的
+
+    // split() 分隔字符串方法 ，接收一个参数做为分隔符，将分隔出来的子字符串存到一个数组中。
+    //          第二个参数指定返回的数组大小
+                //分隔符可以是字符串，也可以是RegExp对象，
+
+    var colorText = "red,blue,green,yellow";
+    console.log(colorText.split(",")); //["red", "blue", "green", "yellow"]
+    console.log(colorText.split(",",2)); //["red", "blue"]
+    console.log(colorText.split(/[^\,]+/)); //["", ",", ",", ",", ""]
+
+
+    //localeCompare()   字符串字母顺序比较法 一个参数：目标字符串。若原字符串应该的字母顺序应该比目标大，返回1，反之返回-1 相等返回0
+    console.log(text.localeCompare("brick"));//1
+    //String构造函数的方法：编码转字符方法：（charCodeAt()逆方法）
+    console.log(String.fromCharCode(104,101,108,108,111)); //hello
+
+</script>
 </body>
 </html>
