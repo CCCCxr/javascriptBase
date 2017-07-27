@@ -5,6 +5,64 @@
     <title>Title</title>
 </head>
 <body>
+<script>
+    // 虽然使用Object构造函数或者对象字面量都可以创建单个对象，但这些方式有个明显的缺点：使用同一个接口创建很多对象，会产生大量的重复代码
+    // 为了解决这个问题。人们开始使用工厂模式的一种变体。
 
+    /**
+     * 工厂模式  这种模式抽象了创建对象的具体过程。使用函数来封装以特定接口创建对象的细节
+     *  使用封装过的函数虽然可以解决创建相似对象的问题，但是却没有识别对象识别的问题
+     */
+    function creatPerson(name,age,job){
+        var o = new Object();
+        o.name = name;
+        o.age = age;
+        o.job = job;
+        o.sayName = function(){
+            console.log(this.name)
+        };
+        return o;
+    }
+
+    var cxr = creatPerson("cxr",26,"web");
+
+    /**
+     * 构造函数模式   ECMAScript中的构造函数可以用来创建特定类型的对象。 例如Object,Array这样的原生构造函数
+     *              在运行的时候会自动出现在执行环境中。也可以创建自定义的构造函数，从而定义自定义创建的对象类型
+     *              的属性和方法。
+     *     构造函数模式用大写字母开头，可以区别于其他函数。
+     *     与工厂模式不同，构造函数模式没有显示地创建对象，并且直接将属性和方法赋给了this对象，而且不需要return.
+     *     创建自定义的构造函数意味着将来可以将它的实例标识为一种特定的类型。
+     *     以这种方式定义的构造函数是在Global对象中的，
+     */
+    function Person(name,age,job){
+        this.name =name;
+        this.age = age;
+        this.job = job;
+        this.sayName = function(){
+            console.log(this.name)
+        }
+    }
+    var person = new Person("cxr",26,"web");
+    // 创建的对象都有一个constructor(构造函数属性),该属性都指向Person
+    console.log(person.constructor == Person); //true
+    console.log(person instanceof Person); //true
+    console.log(person instanceof Object); //true
+    person.sayName();
+    //创建的对象是Person的实例，同时也是Object的实例，因为所有对象均继承自object.
+
+    //构造函数与其他函数不同的地方在于调用方式的不同。 任何函数，只要通过new操作符来调用，那它就可以作为构造函数。如果不使用new,那它和普通函数也不会有什么区别。
+
+    //当做构造函数使用
+    var chen = new Person("cxr",24,"销售");
+    chen.sayName();
+    //作为普通函数调用
+    Person("chen",25,"111");  //在window对象中
+    window.sayName();
+    //在另一个对象的作用域中
+    var o = new Object();
+    Person.call(o,"chenxueru",23,"123");
+    o.sayName();
+</script>
 </body>
 </html>
