@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /**
+     *  每个对象都是基于引用类型创建的，这个引用类型可以是上一章的原声类型，也可以是自己定义的类型
+     */
+    var person = new Object(); //创建一个自定义对象,并为他添加name,age,job属性，然后添加方法 sayName();
+    person.name = "cxr";
+    person.age = "25";
+    person.job = "web";
+    person.sayName = function(){
+        alert(this.name);
+    };
+  //  person.sayName();  //调用对象的方法
+    // 上面的写法已经很少用了，之后都用对象字面量形式来创建自定义对象。
+    var person2 = {
+        name : "cxr1",
+        age : "25",
+        job : "web",
+        sayName : function(){
+            alert(this.name);
+        }
+    };
+ //   person2.sayName();
+
+    /**
+     * ECMA-262第五版在定义只有内部才用的特性时候，描绘了属性的各种特征。
+     * ECMAScript中有俩种属性：数据属性和访问器属性。
+     */
+    //数据属性：包含一个数据值的位置，在这个位置可以读取和写入值，有四个描述其行为特征。
+    /**
+     * [[Configurable]]  表示能否用deleto删除属性而从新定义属性，能否修改属性的特性，或者能否把属性修改为访问器属性。这个特性默认值为true。
+     * [[Enumerable]]  表示能否通过for-in循环返回属性。对于直接定义在对象上的属性，这个特性默认值为true。
+     * [[Writable]] 表示能否修改属性的值。对于直接定义在对象上的属性，这个特性默认值为true。
+     * [[Value]] 包含这个属性的数据值 ，特性默认值为undefined
+     */
+    var exp = {
+        name:"exp"  // value特性的值被设置为exp
+    };
+    // 要修改属性默认的特性，可以使用Object.defineProperty();接收三个参数：属性所在的对象，属性的名字，描述符（也就是特性名字）
+    // 在调用方法的时候，如果不指定，Configurable，Enumerable，Writable特性的默认值都是false.
+    // 设置configurable的特性值为false之后，就不能再设置为true。否则会报错,其他的都可以进行多次修改。
+
+    var expPerson = {};
+    Object.defineProperty(expPerson,"name",{
+        writable : false,
+        value : "cxr"
+    });
+    console.log(expPerson.name); //"cxr"
+    expPerson.name = "chenxueru";  //修改属性值，但是没成功
+    console.log(expPerson.name); //  还是"cxr"
+
+     // 访问器属性：不包含数据值；他们包含一对函数，getter和setter函数（这俩个函数不是必须的）。
+     // 访问器属性不能直接定义，必须使用Object.defineProperty()来定义
+     // 读取访问器属性时 调用getter函数，这个函数负责返回有效的值；
+     // 写入访问器属性时，会调用setter函数并传入新值，这个函数负责决定如何处理数据
+
+    /**
+     * 访问器属性也包含4个特性
+     *  [[Configurable]]  表示能否用deleto删除属性而从新定义属性，能否修改属性的特性，或者能否把属性修改为数据属性。这个特性默认值为true。
+     *  [[Enumerable]]  表示能否通过for-in循环返回属性。对于直接定义在对象上的属性，这个特性默认值为true。
+     *  [[Get]]  在读取属性时调用的函数。默认值为undefined
+     *  [[Set]]  在写入属性时调用的函数。默认值为undefined
+     *  如果只设置getter函数，意味着属性不能写，如果只设定setter函数，则意味着属性不能读。
+     */
+
+    var book = {
+        _year :2004,   // _ 下划线是常用记号，表示只能通过对象方法访问属性
+        edition : 1
+    };
+    // 使用访问器属性的常见方法，设置一个属性的值会导致其他属性发生变化
+    Object.defineProperty(book,"year",{  //设置访问器属性year，它包含2个函数getter和setter。
+        get : function(){                 //  getter返回_year的值
+            return this._year;
+        },
+        set : function(newValue){         //setter函数通过计算来返回确定正确的版本
+            if (newValue > 2004){
+                this._year = newValue;
+                this.edition += newValue -2004;
+            }
+        }
+    });
+
+    book.year = 2005 ;    //因此将year属性修改为2005会将_year变成2005，edition 变成2。
+    console.log(book.edition); //2
+
+    //定义多个属性 ： Object.defineProperties() 接收俩个对象参数， 一个是要添加和修改其属性的对象，第二个对象的属性与第一个对象中要添加或修改的属性一一对应。
+    //  book2定义的对象与book相同，区别就是book2的的属性是同一时间创建的。
+    var book2  = { };
+    Object.defineProperties(book2,{
+        _year:{
+            value : 24
+        },
+
+        edition: {
+            value : 1
+        },
+
+        year : {
+            get :function(){
+                return this._year;
+            },
+
+            set : function(newValue){
+                if (newValue>2004) {
+                    this._year = newValue ;
+                    this.edition +=newValue -2004
+                }
+            }
+        }
+    });
+
+    //读取属性的特性  Object.getOwnPropertyDescriptor()，接收俩个参数：属性所在的对象和要读取描述符的属性名称。 返回一个对象
+
+   var descriptor =  Object.getOwnPropertyDescriptor(book,"_year");
+    //Object {value: 2005, writable: true, enumerable: true, configurable: true}
+    console.log(descriptor);
+    console.log(descriptor.value); //2005
+    console.log(descriptor.writable); //true
+</script>
+</body>
+</html>
