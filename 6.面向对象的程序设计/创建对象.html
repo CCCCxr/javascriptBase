@@ -69,7 +69,8 @@
     console.log(chen.sayName == person.sayName);  //false
 
     /**
-     * 原型模式   每个创建的函数都有一个prototype(原型)属性，这个属性是一个指向对象的指针，而这个对象是包含可以由特定类型的所有实例共享的属性和方法。
+     * 原型模式   
+     *每个创建的函数都有一个prototype(原型)属性，这个属性是一个指向对象的指针，而这个对象是包含可以由特定类型的所有实例共享的属性和方法。
      *          这个原型也叫原型对象，从而可以不必再构造函数中定义对象实例的信息，而是可以将这些信息直接添加到原型对象中。
      */
     function  Human (){
@@ -85,6 +86,9 @@
     console.log(Human1.name);  //chen
     console.log(Human2.name);  //chen
     console.log(Human1.sayName == Human2.sayName); // true
+    /*
+      无论什么时候，只要创建了一个新的函数，就会根据一组特定的规则为该函数创建一个prototype属性，指向这个函数的原型对象。默认情况下，所有的原型对象都会自动获得一个constructor(构造函数)属性，这个属性是一个指向prototype属性所在的指针。
+    */
 </script>
 </body>
 </html>
