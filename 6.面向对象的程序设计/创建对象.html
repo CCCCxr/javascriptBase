@@ -236,7 +236,81 @@
   var Pensons2 = new Pensons("xh",22,"web");
   Pensons1.friends.push("z");
   console.log(Pensons1.friends);
-  console.log(Pensons2.friends);  //这样组合使用俩种模式就不会发生引用类型值的错误了。
+  console.log(Pensons2.friends);  //这样组合使用俩种模式就不会发生引用类型值的错误了。  
+
+  //动态原型模式  把所有的信息封装在构造函数中，而通过在构造函数中选择性的初始化原型。
+  //使用时不能使用对象字面量重写原型。
+  function Persons2(name,age,job){
+    this.name = name;
+    this.age = age;
+    this.job = job;
+    if(typeof this.sayName != "function"){
+        Persons2.prototype.sayName = function(){
+            console.log(this.name);
+        }
+    }
+  }
+  var fds = new Persons2("cxr",23,"aaa");  ////没有sayName  因为它指向的是最初的原型
+  console.log(fds); 
+  console.log(Persons2.prototype);   
+
+
+  //寄生构造函数模式    在前面的几种模式都不使用的情况下，可以使用此模式，  
+  //基本思想是创建一个函数，该函数的作用仅仅是封装创建对象的代码，然后返回新创建的对象。
+  //专门用来为原生的构造函数定义新的方法
+
+  function Tec(a,b,c){
+        var o = new Object();
+        o.name = a;
+        o.age = b;
+        o.job = c;
+        o.sayName = function(){
+            console.log(this.name);
+        };
+        return o;
+    }
+    Tec.prototype.aa = "aa";
+    console.log(Tec.prototype);
+    var t1 = new Tec();
+    var t2 = Tec("zky",30,"Fe");
+    console.info(t1);
+    console.log(t2);
+    console.log(Tec.prototype);
+
+
+//稳妥构造函数模式
+    //稳妥对象：没有公共属性，其方法也不引用this的对象。适合安全环境。 不使用new调用构造函数。
+    function Per(name,age,job){
+        var  o = new Object();
+        o.sayName = function(){
+            console.log(name);
+        }
+        return o ;
+    }
+    var ppp = Per("cxr",12,"3123");
+    ppp.sayName();// 除了这个方法以外没有别的方式可以访问传入构造函数中的原始数据。
+
+
+    function Pers(name, age, job) {
+        var o = new Object();
+        // private members
+        var nameUC = name.toUpperCase();
+        // public members
+        o.sayName = function() {
+            console.log(name);
+        };
+        o.sayNameUC = function() {
+            console.log(nameUC);
+        };
+        return o;
+    }
+    var person = Pers("Nicholas", 32, "software Engineer");
+    person.sayName(); // "Nicholas"
+    person.sayNameUC(); // "NICHOLAS"
+    console.log(person.name);  // undefined
+    console.log(person.nameUC);  // undefined
+    //凡是想设为 private 的成员都不要挂到 Person 返回的对象 o 的属性上面，挂上了就是 public 的了。
+    
 </script>  
 </body>
 </html>
