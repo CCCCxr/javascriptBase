@@ -87,10 +87,68 @@
     console.log(Human2.name);  //chen
     console.log(Human1.sayName == Human2.sayName); // true
     /*
+<<<<<<< HEAD
       无论什么时候，只要创建了一个新的函数，就会根据一组特定的规则为该函数创建一个prototype属性，指向这个函数的原型对象。默认情况下，所有的原型对象都会自动获得一个constructor(构造函数)属性，这个属性是一个指向prototype属性所在的函数（“即创建的那个函数”）。
     */
     console.log(Human); 
     // isPrototypeOf() . 用来确定俩个对象之间是否存在
 </script>
+=======
+    创建一个函数，就会为函数创建一个prototype属性，他是个指针，指向这个函数的原型对象。
+    原型对象含有一个constructor（构造函数）属性，指向prototype属性所在的那个函数（即“创建的那个函数”）。。
+    */
+   console.log(Human);
+   console.log(Human.prototype); //指向自定义构造函数的原型对象。
+   console.log(Human.prototype.constructor);
+   console.log(Human1.constructor);  //Human构造函数 
+   //用isPrototypeOf()方法来判断实例对象和原型是否存在关系,返回布尔值.
+   console.log(Human.prototype.isPrototypeOf(Human1));  //true
+   // Object.getPrototypeOf(),用来返回构造函数的原型对象。
+   console.log(Object.getPrototypeOf(Human1) == Human.prototype); //true 
+   console.log(Object.getPrototypeOf(Human1));  //返回原型对象。
+   //多个实例共享原型属性方法的原理：先搜索实例本身，如果没有就搜索他的原型对象
+   //当给对象实例添加一个新的属性的时候，这个实例会屏蔽原型对象中保存的同名实例，但是不会修改那个属性，可以使用delete操作符来删除实例属性。
+   Human1.name = "xue";
+   console.log(Human1.name);  //"xue"  来自实例
+   console.log(Human2.name);  //"chen" 来自原型
+   delete Human1.name;
+   console.log(Human1.name);  // chen  来自原型
+   /**
+    * 使用从Objcet中继承的hasOwnProperty()可以分辨出属性来自于实例还是原型。
+    */
+   console.log(Human1.hasOwnProperty("name")); // false  来自原型
+   Human2.name = "ru";
+   console.log(Human2.hasOwnProperty("name")); //true  来自实例
+   // Object.getOwnPropertyDescriptor 获取属性的描述符，但是只能在原型对象上调用
+   console.log(Object.getOwnPropertyDescriptor(Human1,"name"));  //undefined
+   console.log(Object.getOwnPropertyDescriptor(Human1.__proto__,"name")); // 返回描述符
+
+
+   /*
+        原型于in操作符
+        in操作符俩种使用方式：单独使用与在for in中使用。
+    */
+   //单独使用:通过对象能够访问给定属性时返回true，不论它来自实例还是原型。
+   //而hasOwnProperty() 只有在属性来自于实例的时候返回true；
+   console.log("name" in Human1);  //true
+   console.log(Human2.hasOwnProperty("name"));  //true  来自实例 
+
+   //！！！判定一个属性在原型还是在实例
+    function a(obj,name){
+        return (name in obj) && !obj.hasOwnProperty(name);
+    }
+
+   // for in 中使用： 返回所有能够通过对象访问的和枚举的属性，无论它存在实例还是存在原型中。屏蔽了原型中不可枚举属性的实例属性也会返回。
+   for(var person3 in Human1){
+        console.log(person3);  // name age sayName
+   }
+   //也可以直接使用ECMAScript5提供的Object.key()方法来枚举属性。接收一个对象作为参数。
+   var keys = Object.keys(Human.prototype);
+   console.log(keys); //["name", "age", "sayName"] 
+   //使用Object.getOwnPropertyNames来得到所有的实例属性，不管他是不是可以枚举。
+   var keyss = Object.getOwnPropertyNames(Human.prototype)
+   console.log(keyss); //["constructor", "name", "age", "sayName"]
+</script>   
+>>>>>>> 595e098fb295b8747fb13ed594a58f047119edf1
 </body>
 </html>
