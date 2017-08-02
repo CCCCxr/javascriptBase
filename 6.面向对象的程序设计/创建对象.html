@@ -87,8 +87,10 @@
     console.log(Human2.name);  //chen
     console.log(Human1.sayName == Human2.sayName); // true
     /*
-      无论什么时候，只要创建了一个新的函数，就会根据一组特定的规则为该函数创建一个prototype属性，指向这个函数的原型对象。默认情况下，所有的原型对象都会自动获得一个constructor(构造函数)属性，这个属性是一个指向prototype属性所在的指针。
+      无论什么时候，只要创建了一个新的函数，就会根据一组特定的规则为该函数创建一个prototype属性，指向这个函数的原型对象。默认情况下，所有的原型对象都会自动获得一个constructor(构造函数)属性，这个属性是一个指向prototype属性所在的函数（“即创建的那个函数”）。
     */
+    console.log(Human); 
+    // isPrototypeOf() . 用来确定俩个对象之间是否存在
 </script>
 </body>
 </html>
