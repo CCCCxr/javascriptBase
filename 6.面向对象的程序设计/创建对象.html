@@ -92,8 +92,8 @@
     */
     console.log(Human); 
     // isPrototypeOf() . 用来确定俩个对象之间是否存在
-</script>
-=======
+
+    /*
     创建一个函数，就会为函数创建一个prototype属性，他是个指针，指向这个函数的原型对象。
     原型对象含有一个constructor（构造函数）属性，指向prototype属性所在的那个函数（即“创建的那个函数”）。。
     */
@@ -146,9 +146,97 @@
    var keys = Object.keys(Human.prototype);
    console.log(keys); //["name", "age", "sayName"] 
    //使用Object.getOwnPropertyNames来得到所有的实例属性，不管他是不是可以枚举。
-   var keyss = Object.getOwnPropertyNames(Human.prototype)
+   var keyss = Object.getOwnPropertyNames(Human.prototype);
    console.log(keyss); //["constructor", "name", "age", "sayName"]
-</script>   
->>>>>>> 595e098fb295b8747fb13ed594a58f047119edf1
+
+  //更简单的原型语法：使用对象字面量来重写整个原型对象，
+  //但是constructor属性不在指向Person2了，它指向了Object,如果它的值很重要，可以将它设置会适当的值。
+  function Person2(){
+
+  }
+  Person2.prototype = {
+    name : "ccc",
+    age : "23",
+    sayName : function(){
+      console.log(this.name);
+    }
+  }
+  function Cchen(){
+
+  }
+  Cchen.prototype = {
+    constructor : Cchen,
+    name : "ccc2",
+    age : "24",
+    sayName : function(){
+      console.log(this.name);
+    }
+  }
+  var Person222 = new Person2();
+  var Cchen2 = new Cchen();
+  console.log(Person222 instanceof Person2);  //返回true。
+  console.log(Person222 instanceof Object); //返回true。
+  console.log(Person222.constructor == Person2); //false  没有设置，constructor指向了Object.
+  console.log(Person222.constructor == Object); // true
+  console.log(Cchen2.constructor == Cchen);  // 设置了constructor true
+  // 这样设置会导致constructor属性变成可以枚举的，如果要兼容使用ECMAScript5，需要将它的[[Enumerable]]特性设置为false.
+  
+  //原型的动态性
+  //任何对原型对象所做的修改都能在实例上反应出来，就算实例在修改原型属性之前。
+  var friend = new Person();
+  Person.prototype.sayHi = function(){
+    console.log("hi");
+  }
+  friend.sayHi();  
+
+  // 原生对象的原型  所有原生的引用类型，使用的都是原型模式，都在其构造函数的原型上定义了方法。
+  console.log(Array.prototype);
+  // 可以在原生对象的原型上面定义新的方法，可以像修改自定义对象的原型一样修改原生对象的原型。但是不支持在原生对象的原型中添加方法，容易发生冲突
+  String.prototype.startsWith = function(text){
+    return this.indexOf(text)  == 0 ;
+  }
+  var msg = "hello world";
+  console.log(msg.startsWith("hello"));  // true
+
+  //原型模式的缺点：由于共享引起的引用类型的问题
+  function Cxr(){
+
+  }
+  Cxr.prototype.name = "chenxueru";
+  Cxr.prototype.age = "23";
+  Cxr.prototype.friends = ["xh","ll"];
+
+  var a = new Cxr();
+  var b = new Cxr();
+  console.log(a.friends);  //["xh","ll"];
+  console.log(b.friends); //["xh", "ll"]
+  a.friends.push("zeng");  
+  console.log(a.friends); //["xh", "ll", "zeng"]  
+  console.log(b.friends); //["xh", "ll", "zeng"]   因为friend数组存在原型中而不是实例中，所以修改了也会再别的实例中反映出来。
+  a.friends = ["zeng"];
+  console.log(a.friends);  //["zeng"]  从新在实例中添加了一个friends属性。 
+
+  //组合使用构造函数模式和原型模式：构造函数模式用来定义实例属性，原型模式用来定义方法和共享属性，这样可以节省内存，还支持向构造函数传参数。
+  
+  function Pensons(name,age,job){
+      this.name=name;
+      this.age=age;
+      this.job=job;
+      this.friends = ["x","l"]
+  }
+
+  Pensons.prototype = {
+    constructor : Pensons,
+    sayName : function(){
+      console.log(this.name)
+    }
+  }
+
+  var Pensons1 = new Pensons("cxr",23,"php");
+  var Pensons2 = new Pensons("xh",22,"web");
+  Pensons1.friends.push("z");
+  console.log(Pensons1.friends);
+  console.log(Pensons2.friends);  //这样组合使用俩种模式就不会发生引用类型值的错误了。
+</script>  
 </body>
 </html>
