@@ -212,28 +212,26 @@
    		OO1.sayHi();
 
    		//寄生组合继承 
-   		  // 先看组合类型的例子  
-   		  function M(name){
-   		  	this.name = name;
-   		  	this.colors = ["red","green","blue"];
-   		  }
-   		  M.prototype.sayName = function(){
-   		  	console.log(this.name)
-   		  }
-   		  function M2(name,age){
-   		  	M.call(this,name);   //第二次调用超类型构造函数
-
-   		  	this.age = age;
-   		  }
-
-   		 M2.prototype = new M();  //第一次调用了超类型构造函数,而且不能传参
-   		 M2.prototype.constructor = M;
-   		 M2.prototype.sayAge = function(){
-   		 	console.log(this.age);
-   		 }
-   		 var m1 = new M2();
-   		 var m2 = new M2();
-   		 console.log(m1,m2);
+       //先看组合继承的例子  
+   function Q(name){
+      this.name = name;
+      this.num = [1,2,3];
+   }
+   Q.prototype.say= function(){
+      console.log(this.name);
+   };
+   function P(name){
+      Q.call(this,name);   //第二次调用Q
+      this.age = 24;
+   }
+   P.prototype = new Q();   //第一次调用Q   而且不能传参
+   P.prototype.constructor = P;
+   P.prototype.sayAge = function(){
+      console.log(this.age);
+   };
+   var p1 = new P("zky");
+   var p2 = new P("tr");
+   console.log(p1,p2); //在实例和prototype都有相同的属性
 </script> 
 </body>
 </html>
