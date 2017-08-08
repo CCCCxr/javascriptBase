@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		/*
+		闭包   有权访问另外一个函数作用域的函数,
+		       创建闭包的常见方式就是在函数内部创建另一个函数.
+		      当函数执行完毕后，局部变量就会被销毁，内存中仅保存全局作用域（全局执行环境的变量对象）。
+   			  在一个函数内部定义的函数会将包含函数（即外部函数）的活动对象添加到他的作用域链中
+    		  闭包会携带包含它的函数的作用域，因此会比其他函数占用更多的内存。
+		 */
+		function a(prop){
+			return function(o1,o2){
+				var v1 = o1[prop];
+				var v2 = o2[prop];
+				return v2 - v1;
+			}
+		}
+		var compare = a("name"); //这个函数compare就是闭包
+		var result = compare({name: "cxr"}, {name: "chen"});
+		console.log(result);  
+		compare = null ; //解除引用 释放内存
+
+		//闭包与变量:闭包只能取得包含函数中任何变量的最后一个值.
+		function cF(){
+			var result = [];
+			for (var i = 0; i < 10; i++) {
+				result[i] = function(){
+					return i;
+				}
+			}
+			return result;
+		}
+		var b = cF();
+		console.log(b[2]());  //10
+
+		//正确的返回方式
+			function cF2(){
+				var result = [];
+				for (var i = 0; i < 10; i++) {
+					result[i] = function(num){
+							return function(){
+								return num;
+							};
+						}(i);   //函数参数按值传递
+					};
+				return result;
+			}
+
+			var a = cF2();
+			console.log(a[1]());   //返回1
+
+
+	 //this对象  
+	 //this对象是在运行时基于函数的执行环境绑定的。
+	 //闭包中的this对象通常指向window,但是由于编写的方式不同,这一点可能不会这么明显在通过call()或者apply()改变函数执行环境的情况下,this就会指向其他对象.
+	 var name = "hello world";
+	 var  object = {
+	 	name:"hello",
+	 	getNameFunc:function(){
+	 		return function(){
+	 			return this.name;
+	 		}
+	 	}
+	 }
+	 console.log(object.getNameFunc()());  //hello world; 而不是对象的name属性. 
+	 //   可以将外部作用域中的this对象保存在闭包可见的变量中,就可以让闭包范文该对象了
+	  var  object2 = {
+		 	name:"hello",
+		 	getNameFunc:function(){
+		 		var that = this;
+		 		return function(){
+		 			return that.name;
+		 		}
+		 	}
+	   }
+	  console.log(object2.getNameFunc()());  //hello
+
+	   var  object3 = {
+		 	name:"hello",
+		 	getNameFunc:function(){
+		 		return this.name;
+		 	}
+	   }
+	      console.log(object3.getNameFunc());  //hello
+	      console.log((object3.getNameFunc)()); //hello
+	     console.log((object3.getNameFunc = object3.getNameFunc)());//hello world
+
+	     //内存泄漏
+	     /**
+	      *  在IE中，如果闭包的作用域链中保存着一个HTML元素，那么就意味着该元素将无法被销毁。
+	      */
+	     (function a(){
+	     	var a = document.getElementById("aa");
+	     	a.onclick = function(){  //闭包
+	     		console.log(a.id);
+	     	};
+	     	a = null ;  //销毁之后就无法再绑定事件了
+	     })();
+	     //上面: 闭包创建了一个循环引用,只要匿名函数存在,就永远无法减少a的引用数(至少是1),它所占用的内存永不回收.
+	     //当声明了一个变量并将一个引用类型赋值给变量的时候这个值得引用次数就加1,
+	     //如果该变量的值变成了另外一个，则这个值得引用次数减1，
+    	//当这个值的引用次数变为0的时候，说明没有变量在使用，这个值没法被访问了，因此可以将其占	用的空间回收，这样垃圾回收器会在运行的时候清理掉引用次数为0的值占用的空间。
+    	//改：
+    	 (function a(){
+	     	var a = document.getElementById("aa");
+	     	var id = a.id;
+	     	a.onclick = function(){  //闭包
+	     		console.log(id);
+	     	};
+	     	a = null ;  //闭包会引用包含函数的整个活动对象，包含a。即使闭包不直接引用a，包含函数的活动对象中也仍然会保存一个引用，所以要设置为null
+	     })();
+	</script>
+</body>
+</html>
