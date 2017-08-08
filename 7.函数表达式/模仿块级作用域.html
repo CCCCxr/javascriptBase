@@ -5,6 +5,39 @@
 	<title>Document</title>
 </head>
 <body>
-	
+	<script>
+	/**
+	 * 块级作用域  javascript中没有块级作用域的概念,所以在块语句用定义的变量,实际上是在执行环境中的
+	 */
+	function c(count){
+		for (var i = 0 ; i < count; i++) {
+			console.log(i);
+		}
+			console.log(i);
+	}
+	// 可以在函数内部随意访问他.
+	function c2(count){
+		for (var i = 0 ; i < count; i++) {
+			console.log(i);
+		}
+		var i ;
+		console.log(i);
+	}
+	// 即使这样从新声明也不会改变它的值
+	// 匿名函数可以用来模仿块级作用域并避免这个问题.
+	(function(){
+		//这里模拟块级作用域
+	})();  
+	//将函数声明放在一对圆括号中,实际上表示它是一个函数表达式,而紧随其后的另一对圆括号会立即调用这个函数.
+	function aaa(count){
+		(function (){   //这个也叫私有作用域.
+			for( var i = 0; i < count; i++){
+				console.log(i);  //循环输出0~4
+			}
+		})();
+		console.log(i); //报错 
+	}
+	aaa(5);
+	</script>
 </body>
 </html>

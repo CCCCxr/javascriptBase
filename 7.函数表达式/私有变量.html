@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script type="text/javascript">
+	/**
+	 * 私有变量 任何在函数内定义的变量都可以成为私有变量,私有变量包括函数的参数,局部变量和在函数中定义的其他函数.
+	 */
+	function add(num1,num2){
+		var sum  = num1 + num2 ;
+		return sum;  
+	} //函数中的sum num1 num2都是属于私有变量,无法再函数外边访问.
+	//我们可以通过创建一个闭包来创建一个访问私有变量的公有方法
+	//我们把这种方法叫做特权方法
+	
+	// 在构造函数中定义特权方法
+	function my(){
+		// 定义私有变量和函数
+		var a = 10;
+		function b(){
+			return false;
+		}
+
+		// 创建特权方法
+		this.public = function(){
+			a++;
+			return b();
+		}
+	};   //创建实例之后,只有通过使用public()方法来访问 私有变量a和私有函数b;
+
+	function Person(name){
+		this.setname = function(value){
+			name = value;
+		}
+		this.getname = function(){
+			return name;
+		}
+	}
+	var person = new Person("cxr");
+	console.log(person.getname());  //cxr
+	person.setname("chen");
+	console.log(person.getname());  //chen
+	//除了使用getname()和setname()俩个方法以外,无法再访问到name.
+    //缺点:必须使用构造函数来达到这个目的,但是构造函数会针对每个实例都创建一组同样的方法.
+    
+    
+    // 使用静态私有变量来解决这个问题.
+    // 通过在私有作用域中定义私有变量和函数,同样也能创建特权方法.
+    (function(){
+    	var a = 100;
+    	function b(){
+    		return false;
+    	};
+
+    	//构造函数
+    	function My(){
+
+    	};
+
+    	My.prototype.publicMethod = function(){
+    		a++;
+    		return b();
+    	};
+    })();
+	</script>
+</body>
+</html>
