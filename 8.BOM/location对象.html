@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script type="text/javascript">
+	/**
+	 *  location 对象  提供了当前加载窗口文档有关的信息,还提供了一些导航功能. 而且他即使window对象,也是location对象.
+	 */ 
+	
+
+	 /**
+	  * location的属性 
+	  * hash    返回URL中的hash(#号后跟0或者多个字符),如果URL中不包含散列,则返回空字符串  ex:"#content"
+	  * host    返回服务器名称和端口号(如果有)        ex: "www.xxxx.com:80";
+	  * hostname 返回不带端口号的服务器名称    ex: "www.xxxx.com";	  	  
+	  * href    返回当前加载页面的完整的URL.而Location对象的toString()方法也返回这个值  ex:"http://www.xxx.com"
+	  * pathname  返回URL中的目录或文件名   ex : "/xxxx/";
+	  * port    返回URL中指定的端口号,如果没有返回空字符串  ex:"8080";
+	  * protocol  返回页面使用的协议   ex: "http:或者https:"
+	  * search  返回URL查询的字符串,问号开头,也就是get方法携带的参数.返回?号开头以后的所有字符串
+	  **/
+	  //每次修改location的属性(hash除外),页面都会以修改过的url从新加载.
+	   //查询字符串参数  
+	   //  创建一个函数用来解析查询字符串,返回包含所有参数的一个对象
+	   function getQueryStringArgs(){
+	   		//取得查询字符串并去掉开头的问号
+	   		var qs = (location.search.length > 0 ? location.search.substring(1) : "";);
+	   		var arg = {};   
+
+	   		// 取得每一项 
+	   		items = qs.length ? qs.split("&") : [] ,
+	   		item = null;
+	   		name = null;
+	   		value = null;
+
+	   		//在for循环中使用 
+	   		i = 0 ,
+	   		len = items.length;
+
+	   		//逐个将某一项添加到args中
+	   		
+	   		for(i=0;i<len;i++){
+	   			items = items[i].split("=");
+	   			name = decodeURIComponent(item[0]);
+	   			value = decodeURIComponent(item[1]);
+
+	   			if(name.length){
+	   				arg[name] = value;
+	   			}
+	   		};
+	   		return arg;
+	   }
+
+
+	  /**
+	   * 位置操作  location.assign("http://www.baidu.com");
+	   *         这会立刻打开新的URL并产生一条新的历史记录, 
+	   *         设置location.href与window.location值为URL值,也等于调用改方法
+	   *         location.replace();跳转到一个新的url,但不会生成历史记录,用户也无法进行后退操作.
+	   *         location.reload()  重新加载页面 (选择最有效的)
+	   *         location.reload(true)  重新加载页面(从服务器强制重新加载)
+	   */
+	</script>
+</body>
+</html>

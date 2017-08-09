@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script type="text/javascript">
+	/**
+	 * BOM: 提供很多的对象用来访问浏览器的功能.
+	 */
+	
+	/*
+	 *	window 对象:  BOM的核心对象,既是javascript访问浏览器窗口的一个接口,也是ECMAScript规定的Global对象. 
+	 */
+	// 全局作用域 所有在全局作用域中声明的变量,函数,都会变成window对象的属性和方法.
+	 
+	var age = 29;
+	console.log(window.age);  //29 
+	function sayage(){
+		console.log(age);
+	}
+	sayage();
+	window.sayage();
+	//定义在window对象上的变量和定义在全局作用域中的变量有所区别 
+	//全局变量不可以使用delete操作符删除,而直接定义在window对象上的可以
+	
+	window.color = "red";
+	console.log(delete window.age);   //返回false
+	console.log(delete window.color); //返回true
+
+	/*
+	 * 窗口关系及框架 :如果页面中包含框架,则没个框架都有自己的window对象,并保存在frames(<frames>标签)集合中,在frames集合中可以通过数值索引(0开始,左到右,上到下)或者
+	 * 框架名称来访问相应的window对象.每个window对象都有一个name属性,其中包含框架名称. （html5已废弃,用<iframe>）
+	 */
+	
+
+	/**
+	 * 窗口位置 : window.screenLeft/window.screenX  表示窗口相对于屏幕左边的位置 后者在firefox中使用
+	 * 			  window.screenTop/window.screenY   表示窗口相对于屏幕上边的位置后者在firefox中使用
+	 * 			
+	 * 			  window.moveTo(200,200) 移动到200的位置(除IE都被禁用了) 
+	 * 			  window.moveBy(200,200) 移动200像素   (除IE都被禁用了)
+	 */
+	
+	/*
+	 * 窗口大小 :  window.innerWidth/document.documentElement.clienWidth   返回窗口中页面视图的宽度(减去边框宽度)
+	 * 			   window.innerHeight/document.documentElement.clineHight  返回窗口中页面视图的高度(减去边框宽度)
+	 * 			   window.outerWidth   返回浏览器窗口本身的宽度
+	 * 			   window.outerHeight  返回浏览器窗口本身的高度
+	 *
+	 *调整窗口大小
+	 *			    window.resizeTo(100,100);(除IE都被禁用了)
+     *				window.resizeBy(100,100);(除IE都被禁用了)
+	 */
+	
+		/**
+		 *  导航和打开窗口
+    	 *	var a= window.open() 4参数：1.url 2.窗口目标(target) 3.特性字符串(width,height,top,left,location...) 4.布尔值（是否取代当前页）
+   		 *	a.opener  保存打开它的窗口的对象
+    	 *	a.close() 关闭该窗口（只针对于弹出窗口） 关闭后窗口引用还在，不过只有a.closed属性
+		 */
+		
+		/**
+		 * 超时调用和间歇时间调用
+		 *    超时调用:setTimeout()方法,俩个参数 要执行的代码和毫秒表示的时间(即在执行之前要等待多少秒)
+		 *    间歇时间调用(每个几秒重复调用) setInterval() 与setTimeout()方法一样 
+		 */
+	
+
+		//超时调用 调用之后会返回一个settimeid  可以通过这个ID来取消超时调用 
+		var timeid = setTimeout(function(){
+			console.log("hello world");
+		},1000);  //不推荐直接传递字符串.
+
+		clearTimeout(timeid); //取消超时调用
+
+		// 与超时调用一样,setInterval()返回一个setIntervalid, 可以通过这个ID来取消间歇调用
+		var  timeInterval = setInterval(function(){
+			console.log("hello world");
+		},1000); 
+		
+		clearInterval(timeInterval);  //取消间歇调用
+
+
+		/**
+		 * 系统对话框  alert();  弹出一个系统对话框    用户只能观看.
+		 * 			   confirm() 弹出一个系统对话框,根据用户的点击按钮来决定执行哪些操作 返回一个布尔值.
+		 * 			   prompt()  弹出一个提示框,提示用户输入一些文本.  方法接受俩个参数  要显示给用户的文本提示和文本输入域的默认值 ,
+		 * 			   			 用户点击确认返回文本域的值,如果用户点击除确定之外的方式关闭了对话框,则返回Null
+		 */
+		
+		if(confirm("Are you sure?")){
+			alert("I'm so glad you're sure")
+		} else {
+			alert("I'sorry to hear you're not sure")
+		}
+
+
+		var result = prompt("你的名字?","输入你的名字");
+		if(result){
+			alert("你好,欢迎"+result);
+		} else {
+			alert("请输入你的名字");
+		}	
+		
+	</script>
+</body>
+</html>
