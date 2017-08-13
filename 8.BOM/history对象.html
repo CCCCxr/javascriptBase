@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script type="text/javascript">
+		// history 对象 保存着用户的上网记录,从窗口被打开的那一刻起.
+		
+		// history.go()方法,可以在用户的历史纪录中跳转,接收一个参数,负数表示向后,正数表示向前.
+		history.go(-1); // 向后一页.
+		history.go(1);  // 向前一页.
+
+		//也可以传递一个字符串参数,会跳转到历史记录中包含该字符串中的第一个位置,可能后退,也可能前进.
+		
+		history.go("www.baidu.com");  //跳转到最近的百度的页面.
+		
+		//还是使用简写方法back()和forward()来代替go();
+		history.back()  //  后退一页.
+		history.forward() // 前进一页.
+
+		history.length // 表示历史记录的数量.
+	</script>
+</body>
+</html>
