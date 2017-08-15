@@ -3,10 +3,36 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Document</title>
+	<!--
+    客户端检测：先设计最通用的方案，然后再使用特定于浏览器的技术增强该方案。
+           1.能力检测
+           2.怪癖检测
+           3.用户代理检测
+	-->
 </head>
 <body>
 	<script type="text/javascript">
-	//客户端检测
+	//能力检测
+	   // 不是用来识别特定的浏览器,而是识别浏览器的能力,只要浏览器支持特定的能力,就可以给出解决方案.
+	   function getElement(id){
+	   	 if (document.getElementById) {
+	   	 	return document.getElementById(id);
+	   	 } else if (document.all) {  
+	   	 	return document.all[id];
+	   	 } else {
+	   	 	throw new Error("No way to retrieve element");
+	   	 }
+	   };
+		//检测浏览器是否支持获取id的方法
+	// 先检测达成目的的最常用特性.对于上面的例子来说先检测document.getElementById方法,如果没有在检测document.all.
+	// 第二个就是必须检测实际要用到的特性.
+	
+	    //尽量使用 typeof 进行能力检测
+    function isSortable(object){
+	//        return !!object.sort;    错误  万一sort是某个对象属性
+        return typeof object.sort == "function";
+    } 
+	
 	</script>
 </body>
 </html>
