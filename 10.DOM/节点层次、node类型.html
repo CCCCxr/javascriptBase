@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">  <!-- 文档元素 -->
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<p>hello world!</p> 
+	<script type="text/javascript">
+	   //DOM(文档对象模型)是针对HTML和XML文档的一API。它绘画了一个层次化的节的节点数，运行开发人员添加、移动和修改页面的某一部分。
+
+	   /*
+	   	节点层次：
+	   		DOM将任何HTML或XML文档描绘成一个有多层节点的结构。节点分为几种不同的类型。每种类型分别表示文档中不同的信息及（或）标记。每个节点都拥有各自的特点，数据和方法。也与其他节点存在某种关系，节点之间的关系构成了层次，而所有的页面标记则表现为一个以特定根节点的树形结构。
+			
+
+			每一段标记都能用树种的一个节点表示：元素通过元素节点表示，特性通过特性节点表示，文档通过文档类型表示，注释通过注释节点表示。
+			总共有12种节点类型，这些类型都继承一个基类。
+	    */
+
+	    /**
+	     *  DOM1级定义了node借口，将DOM中所有节点实现。
+	     *  每一个节点都具有一个nodeType属性，用于表明节点的类型。节点类型由在Node类型中定义的12个数值常量来表示。
+	     *
+	     *  Node.ELEMENT_NODE (1)   元素节点。
+	     *  Node.ATTRIBUTE_NODE (2)  属性节点 
+	     *  Node.TEXT_NODE (3)  文本节点   一般常用的就这三个。 
+	     *  通过比较常量可以确定节点类型。
+ 	     */
+ 	    
+ 	    if(someNode.nodeType == 1){
+ 	    	console.log("这是一个元素节点")
+ 	    } else if(someNode.nodeType == 2){
+ 	    	console.log("这是一个属性节点")
+ 	    } else if(someNode.nodeType == 3){
+ 	    	console.log("这是一个文本节点")
+ 	    }
+
+
+	   /**
+		*  节点属性：
+		*      nodeName nodeValue  (如果是元素标签 name保存的是标签名，value保存的是null)
+		*      childNodes 保存一个NodeList的类数组对象，按照顺序来保存子节点。拥有length属性。
+		*  				  可以通过方括号或者item()方法来访问他的子节点。
+		*  				  var firstChild = someNode.childNodes[0]
+		*  				  var secondChild = someNode.childNodes.item(1)
+		*  				  var count = someNode.childNodes.length
+		*  	   parentNode 指向该文档树中的父节点。父节点中的子节点可以使用previousSibling和
+		*  				  nextSibling属性，可以访问同一列表中的前面和后面的节点，如果没有则为null。
+		*  	   hasChildNodes()  在节点包含一个或多个节点的情况下返回true。
+		*/
+
+
+		/*
+		*  操作节点：使用这些方法的时候需要取得父节点。并且不是所有的节点都有子节点，如果在不支持子节点的节点上调用，则会产生错误
+		*  		appendChild（），向节点的childNodes列表的末尾添加一个新的节点，添加完成后 返回新增的节点。
+		*  						如果已经传入的节点已经存在在文档中了，那么就会将该节点变成最后一个节点。
+		*  		insertBefore()，在某个节点前插入一个新的节点，接收俩个参数，要插入的节点和作为参照的节点。
+		*  		replaceChild()，替换一个节点，接收俩个参数：要插入的节点和要替换的节点。
+		*		removeChild(), 移除一个节点，接收一个参数：即要移除的节点。
+		* */
+
+		// 所有类型的节点都有的方法：cloneNode() 接收一个布尔值参数，根据传入的参数决定是进行深复制还是浅复制。
+	</script>
+</body>
+</html>

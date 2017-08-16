@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+    <div class="mydiv1" id="mydiv" >
+
+    </div>
+    <script>
+        /**
+         * Element 提供了元素标签名，子节点及特性的访问。
+         *  特征：nodeType 的值为1 ； nodeName的值为元素的标签吗。 nodeValue 值为null
+         */
+
+        // 访问元素的标签名可以使用nodeName 属性 也可以使用tagName属性 ； 标签名是大写
+        var div = document.getElementById("mydiv");
+        console.log(div.tagName);  //"DIV"
+        console.log(div.tagName == div.nodeName); // true
+
+        //1.HTML元素  由HTMLElement类型表示，而HTMLElement类型直接继承自Element并添加了一些属性。
+        //特性:id title lang dir className   (可读可写)
+        console.log(div.id);
+        console.log(div.title);
+        console.log(div.lang);
+        console.log(div.dir);
+        console.log(div.className);
+        //也可以进行修改
+        div.id = "OtherID";
+        console.log(div.id); // OtherID
+
+
+        // 对标签属性进行操作  getAttribute()  setAttribute()  removeAttribute()
+         //获取属性 getAttribute()
+        console.log(div.getAttribute("id"));
+         // 设置属性 setAttribute()
+        console.log(div.setAttribute("id","newid"));
+        //删除属性  removeAttribute()
+        div.removeAttribute("id");
+
+
+
+        //.attributes属性   拥有： getNamedItem(name) removeNamedItem(name)  setNamedItem(node)  item(pos)
+        console.log(2,div.attributes["id"]);//等价于下面这个
+        console.log(2,div.attributes.getNamedItem("id"));
+        console.log(2,div.attributes.removeNamedItem("class"));
+        console.log(2,div.attributes);
+        console.log(2,div.attributes.item(2));
+
+        //创建元素 document.createElement()  接受一个参数：要创建的标签名 创建之后之后使用appendChild()/insertBefore()/replaceChild()方法添加到节点数中。
+
+        //7.元素的子节点
+        var ul = document.getElementById("ul");
+        console.log(ul.childNodes.length); //IE是3 普通是7
+    </script>
+</body>
+</html>

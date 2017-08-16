@@ -9,8 +9,14 @@
 	// 用户代理检测  通过检测用户代理字符串来确定实际使用的浏览器.在每一次http请求过程中,用户代理字符串是作为响应的首部发送的,而且可以用过navigator.userAgent属性访问.
 	// 电子欺骗,指浏览器通过在自己的用户代理字符串加入一些错误或误导性信息,来达到欺骗服务器的目的.
 	console.log(window.navigator.userAgent);
-	//识别呈现引擎 : 五大呈现引擎 IE、Gecko、WebKit、KHTML、Opera, 要正确的识别呈现引擎，关键是检测顺序要正确，opera webkit KHTML Gecko IE 
-	
+	/*
+		识别呈现引擎 : 五大呈现引擎 IE、Gecko、WebKit、KHTML、Opera, 要正确的识别呈现引擎，关键是检测顺序要正确，opera webkit KHTML Gecko IE 
+		识别浏览器：识别了浏览器的呈现引擎，但不一定，苹果公司的 Safari浏览器和谷歌公司的 Chrome浏览器都使用 WebKit作为呈现引擎，还需要格外判断
+	    识别平台：三大主流平台是 Windows、Mac 和 Unix（包括各种 Linux）   navigator.platform
+	    识别 Windows操作系统：为了检测不同的Windows操作系统，必须要使用正则表达式。
+	    识别移动设备：用户代理字符串
+	    识别游戏系统：用户代理字符串
+	 */
 	var client = function(){
 		var engine = {
 			//呈现引擎 
@@ -52,7 +58,10 @@
 			android : false,
 			nokiaN : false,
 			winMobile : false
-			
+
+			// 游戏系统 
+			wii : false,
+			ps : false
 		};
 
 
@@ -159,6 +168,23 @@
 			system.android = parseFloat(RegExp.$1);
 		}
 		
+		// 诺基亚N系列
+		system.nokiaN = ua.indexOf("NokiaN") > -1;
+
+		//windows mobile 
+		if(system.win == "CE"){
+			system.winMobile = system.win;
+		} else if (system.win == "Ph"){
+			if (/Windows Phone OS (\d+.\d+)/.test(ua)) {
+				system.win = "Phone";
+				system.winMobile = parseFloat(RegExp["$1"]);
+			}
+		}
+
+		// 游戏系统 
+		system.wii = ua.indexOf("Wii") > -1;
+		system.ps = /playstation/i.test(ua);
+
 		return {
 			engine:engine,
 			browser:browser,

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <p>现在的时间是：</p>
+</body>
+<script>
+    document.write("<strong>"+(new Date()).toString()+"</strong>");
+    /**
+     *
+     *  js通过Document 类型表示文档。document对象(继承自Document类型的一个实例)来表示整个HTML页面。
+     *  document对象是window对象的一个属性
+     *   Document节点具有下列特征：
+     *        nodeType 的值是9；
+     *        nodeName 的值是"#document"
+     *        nodeValue和parentNode的值为null。
+     */
+
+    //文档的子节点可以是 DocumentType、Element、ProcessingInstruction Comment类型
+    // 属性： document.documentElement  指向<html>元素 ，document.body 指向<body>元素 document.doctype  指向 <!DOCTYPE>
+
+    /**
+     * 文档的信息 ： 获取文档的标题 ： document.title; 设置文档的标题：document.title = "New page title";
+     *      获取完整的URL  var url = document.URL ; 即地址栏中的url
+     *      获取域名  var domain = document.domain ; 只有页面的域名。
+     *      获得来源页面的RUL  var referrer = document.referrer; 如果没有来源页面，referrer属性中可能会包含字符串。
+     */
+
+    /**
+     * 查找元素：document.getElementById() 通过id来获取元素的引用
+     *         document.getElementByTagName()  通过元素的标签名来获取，返回页面中所有的改标签名引用组成的一个数组
+     *         document.getElementByName() 与TagName方法相同，只不过通常在单选按钮中使用，确保发送给浏览器的值正确。
+     * 特殊集合：document.anchors 包含文档中所有带name特性的<a>元素
+     *         document.forms 页面中的所有表单元素
+     *         document.images 页面中所有的Img元素。
+     *         document.links 页面中带有href特性的<a>元素
+     */
+    /**
+     * 文档写入： document.write(), document.writeln()  document.open() 和 document.close() 。
+     *          write()和writeln() 接受一个要写入到输出流中的文本， 前者鸳鸯写入，后者则会在末尾添加一个换行符。
+     */
+</script>
+</html>
