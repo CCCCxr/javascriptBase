@@ -3,8 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <title></title>
+    <style>
+        .mydiv{
+            width: 50px;
+            height: 50px;
+            border: 1px solid red;
+        }
+    </style>
+
 </head>
 <body>
+<div class="mydiv">
+    <p></p>
+</div>
 <script>
     //DOM1级主要是定义HTML和XML文档的底层结构。DOM2级和DOM3级则在这个结构的基础上引入了更多的交互能力，也支持了更高级的XML特性、
 
@@ -18,7 +29,47 @@
      *  HTML：在1级HTML基础上构建，添加了更多的属性、方法和新接口。
      */
 
+    /**
+     * DOM2级和3级的目的在于扩展DOM API以满足XML的所有需求和更好的提供错误处理及特性检测能力。
+     * 用document.implementation.hasFeature方法判定浏览器是否支持某模块
+     */
+    // 针对XML命民空间的变化    
+     
+        //1.Node类型的变化
+        //2.Document类型的变化
+        //3.Element类型的变化
+        //4.NameNodeMap类型的变化 
+    // 其他方面的变化
+        //1.DocumentType类型的变化
+        //2.Document类型的变化
+        //3.Node类型的变化
+        //4.框架的变化
 
+    // 样式 ：
+    //     1.访问元素的样式
+    //     在支持style特性的HTML元素在JavaScript中都有一个对应的style属性。这个style对象包含着通过HTML的style特性指定的所有样式信息。（不包括外部样式表和嵌入样式表） 
+    //     多数情况下都可以通过简单的转换属性名的格式来实现转换，但是float要写成cssFloat ie支持的是styleFloat.
+    //     只要取得一个有效的元素的引用，就可以用js给为其设置样式
+    var div = document.getElementsByClassName("mydiv")[0];
+    div.style.width = "100px";
+    div.style.height = "100px";
+    div.style.border = "1px solid black";
+    console.log(div.style.border);  // 也可以通过这样来取得元素的样式信息
+
+    //DOM2级还为style对象定义了一些属性和方法。
+    //  cssText 可读可写style特性中的css代码 length 表示给元素的css属性的数量。 parentRule 表示给CSS信息的CSSRule对象。
+    //  getPropertyCSSValue() 返回包含给定属性值的CSSValue对象。getPropertyPriority() 如果给定的属性使用!important设置则返回important 否则返回空字符串
+    //  getPropertyValue()返回给定属性的字符串值。 item()返回给定位置的CSS属性名称 removeProperty()从样式中删除给定属性
+    //  setProperty()将给定属性设置相应的值，并加上important或者一个空字符串。
+    console.log(div.style.cssText);
+    div.style.setProperty("width","300px","important");
+    console.log(div.style.getPropertyValue("width"));
+
+    //计算的样式
+    //getComputedStyle() 接收2个参数 ： 要计算出最终样式的元素和一个伪元素字符串（可选）
+    var computed =document.defaultView.getComputedStyle(div);
+    console.log(computed.width);
+    // ie中为 currentStyle
 </script>
 </body>
 </html>
