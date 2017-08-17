@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <div>
+        <p id="p">hello world!</p>
+    </div>
+<script>
+    // 文本节点由text类型表示。 特征： nodeType == 3 ， nodeName 的值为"#text"；  nodeValue的值为节点的文本。 不支持子节点。 父节点是一个element。
+
+    // 可以通过nodeValue或data属性来访问Text中包含的文本。
+    // 文本节点拥有length属性
+    var txt = document.getElementById("p").firstChild;
+    console.log(txt.nodeValue);
+    console.log(txt.data);
+
+    //操作节点 appendData() deleteData() insertData() replaceData() splitText() substringData()
+    txt.appendData("123");//hello world!123  从末尾添加字符
+    txt.deleteData(2,2); // heo world!   从第二个位置开始删除2个字符
+    txt.insertData(4,"chen");  // hellcheno world! 从第四个位置开始添加字符
+    txt.replaceData(2,4,"cxr"); // hecxrworld!  从第二个位置开始到第四个位置的字符串替换成cxr。
+    var p = txt.splitText(5); // 从指定位置将当前文本节点分成俩个文本节点 返回分割位置之后的节点
+    var p2 = txt.substringData(2,2);  // 提取一个从2开始到2+1为止处的文本
+    txt.nodeValue = "I am not happy!";  //修改节点的值
+    console.log(txt,p,p2);
+
+    //创建文本节点 document.createTextNode()  接受要插入节点中的文本
+    var txtNode = document.createTextNode("<strong>陈</strong>");
+
+    var element = document.createElement("div");
+    element.className = "message";
+    element.appendChild(txtNode);
+    document.body.appendChild(element);
+
+
+    //规范化文本节点  合并相邻文本节点： normalize()  在需要合并的一堆节点的父节点上调用此方法
+</script>
+</body>
+</html>
