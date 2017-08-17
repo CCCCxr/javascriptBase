@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+    <div class="mydiv">
+        <div id="div">
+            <p class="p"></p>
+        </div>
+    </div>
+
+<script>
+        //DOM的俩个主要的扩展是Selectors API (选择符API) 和HTML5
+        //选择符API思路：根据CSS选择符选择与某个模式匹配的DOM元素
+
+
+        //querySelector()方法  接受一个css选择符，返回与该模式匹配的第一个元素，如果没有返回null。
+
+    var body = document.querySelector("body"); // 取得body元素
+
+    var Mydiv = document.querySelector(".mydiv"); // 取得类为mydiv的元素
+
+    var div = document.querySelector("#div"); // 取得id为div的元素
+
+    var p = document.querySelector("p.p"); //取得类名为p的元素
+
+    // 通过document调用querySelector()方法的是，会在文档的元素范围内查询。
+    //通过Element类型调用的时候，会在该元素后代的范围内查找匹配的元素。
+
+    //querySelectorAll() 与querySelector()方法一样 ，只是返回的是一个NodeList实例 访问NodeList实例：item()或【】
+</script>
+</body>
+</html>
