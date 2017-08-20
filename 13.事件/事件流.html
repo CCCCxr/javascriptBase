@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div onclick="console.log('hello world')">
+    <input type="button" onclick="console.log(event.type)"/>
+</div>
+
+<script>
+    // 事件   javascript 与html之间是通过事件交互的。  事件就是文档或浏览器窗口发生一些特点的交互瞬间。
+
+    // 事件流  IE的事件流叫事件冒泡 即节点一直向上传播到文档
+     //       Netscape的事件流叫做事件捕获，从文档到节点，与事件冒泡相反
+     // DOM2级规定的事件包括3个阶段  ： 事件捕获阶段，处于目标阶段和事件冒泡阶段 捕获阶段的时候是不会接收到事件。
+
+
+    //  事件处理程序： 响应某个事件的处理函数就叫做时间处理程序。以on开头， 像onclick 这样的
+
+
+    //HTML事件处理程序
+        // 可以使用与事件处理程序同名的HTML特性来指定
+        //  这样创建的事件会有一个内部变量event,代表元素的类型
+        // 也调用在页面的其他地方定义的脚本。
+
+    function  sayhe(){
+        console.log("hello world")
+    }
+
+</script>
+</body>
+</html>
