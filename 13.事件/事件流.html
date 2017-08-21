@@ -6,9 +6,13 @@
 </head>
 <body>
 <div onclick="console.log('hello world')">
-    <input type="button" onclick="console.log(event.type)"/>
+    <input type="button" onclick="console.log(event.type)" value="button"/>  <!--事件冒泡的原因 div上的事件也会触发 -- >
+    <!--  this指的是事件的目标元素-->
+    <input type="button" onclick="console.log(this.value)" value="按钮"/>
 </div>
-
+    <button  id="btn">DOM0级事件处理程序</button>
+    <button id="btn2">DOM2级事件处理程序</button>
+    <button id="btn3">IE事件处理程序</button>
 <script>
     // 事件   javascript 与html之间是通过事件交互的。  事件就是文档或浏览器窗口发生一些特点的交互瞬间。
 
@@ -24,10 +28,38 @@
         // 可以使用与事件处理程序同名的HTML特性来指定
         //  这样创建的事件会有一个内部变量event,代表元素的类型
         // 也调用在页面的其他地方定义的脚本。
+        //缺点：时差问题，用户可能会在元素加载完成之后就触发相应事件。但是事件并不具备执行能力
+        //     扩展事件处理程序的作用域链在不同浏览器中会导致不同结果。
+        //      HTML和JS代码紧密耦合。
 
     function  sayhe(){
         console.log("hello world")
     }
+    // DOM0级事件处理方式：将一个函数赋值给一个事件处理程序属性。
+    //     程序中的this引用的是当前元素
+    var btn = document.getElementById("btn");
+    btn.onclick = function(){
+        alert(this.id)
+    };
+    btn.onclick = null;  // 删除事件处理程序。
+
+    //DOM2级事件处理程序
+    // 定义了2个方法：addEventListener() 和removeEventListener(). 用于处理指定和删除事件处理程序
+    //  都接收3个参数  要处理的事件名字 作为事件处理程序的函数和一个布尔值，如果布尔值是true表示在捕获阶段调用处理函数，如果是false 则表示在冒泡阶段调用
+
+    var btn2 = document.getElementById("btn2");
+    function cl(){
+        console.log(this.id)
+    }
+    btn2.addEventListener("click",cl,false); // 通过这样的方式添加的只能通过removeEventListener删除
+    btn2.removeEventListener("click",cl,false);  // 如果是添加的是匿名函数则没有效果
+
+    // IE的事件处理程序
+
+    // attachEvent() 和 detachEvent()  俩个方法接收相同的俩个参数：事件处理程序名称和事件处理函数 而且只会在冒泡阶段添加
+    // 但是支持IE事件处理程序的只有IE和Opera
+
+
 
 </script>
 </body>

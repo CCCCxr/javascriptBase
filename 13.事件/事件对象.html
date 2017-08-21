@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <!--
+        当触发DOM上的某个事件的时候会产生一个事件对象event,这个对象中包含着所有有关事件的信息。
+        DOM中event对象的属性（都是只读的）：bubbles  表明事件是否冒泡
+                            cancelable   表明是否可以取消事件的默认行为
+                            currentTarget   其事件处理程序当前正在处理事件的元素
+                            defaultPrevented
+                            detail  与事件相关的细节信息
+                            eventPhase  调用事件处理程序的阶段 1捕获 2处于目标 3冒泡
+                            preventDefault() 取消事件的默认行为 如果cancelable的值为true 则可以使用。
+                            stopImmediatePropagation() 取消事件的进一步捕获或者冒泡，同时阻止任何事件处理程序被调用 DOM3新增
+                            stopPropagation()  取消事件的进一步捕获或者冒泡 如果bubbles为true的时候 可以使用者方法
+                            target 事件的目标
+                            trusted  true表示事件是浏览器生成的 false表示事件是开发人员添加的
+                            type  触发事件的类型
+                            view  与事件关联的抽象视图。
+
+       IE中的事件对象 属性： cancelBubble returnValue serElement type 、
+       事件处理完毕之后event对象就会被销毁
+     -->
+
+    <button id="btn">点我</button>
+    <script>
+        var btn  = document.getElementById("btn");
+        btn.onclick = function(){
+            console.log("DOM0级事件处理"+event.type)
+        };
+        btn.addEventListener("click",function(){
+            console.log("DOM2级事件处理"+event.type)
+        },false);
+    </script>
+</body>
+</html>
