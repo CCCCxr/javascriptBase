@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    /**
+     * DOM3级规定了事件的类型 ：UI事件：当用于与页面上的元素交互时触发
+     *                      焦点事件：当用户通过鼠标在页面上执行操作的时候触发
+     *                      滚轮事件：当使用鼠标滚轮（或类似设备）是触发
+     *                      文本事件：当在文档中输入文本时候触发；
+     *                      键盘事件：当用户通过键盘在页面上执行操作时候触发
+     *                      合成事件：当为IME（输入法编辑器）输入字符时触发
+     *                      变动（mutation）事件：当底层DOM结构发生变化时触发
+     */
+
+
+    // UI事件：load unload abort error(js发生错误是触发) select(当用户选择文本框中的一个或多个字符时触发) resize scroll
+    // 焦点事件：  blur(失去焦点触发，并且不会冒泡)  focus(获得焦点，并且不会冒泡)  focusin （它冒泡） focusout(与blur等价，但是冒泡)
+    // 鼠标与滚轮事件  click  dblclick(双击) mousedown mouseenter(鼠标从外部首次移动到内部) mouseleave mousemove(鼠标在元素内部移动时重复触发) mouseout mouseover mouseup(释放鼠标按钮触发)
+            // mousewheel（鼠标滚轮事件）
+            //  客户区坐标位置： 知道鼠标是在视口的什么位置  clientY clientX
+            //  页面坐标位置： 知道事件是在页面中的什么位置发生的 pageX pageY
+                //页面没有滚动的情况下 pageX和pageY的值与clientY和clientX相等
+            //  屏幕坐标位置：screenX screenY
+            // 修改键 ： event对象中添加了4个修改键属性 shiftKey ctrlKey altKey metaKey（windows是windows键）
+            // 相关元素： 通过event对象的relatedTarget提供相关元素的信息，但是只在mouseout和mouseover的事件中有值
+
+</script>
+</body>
+</html>
