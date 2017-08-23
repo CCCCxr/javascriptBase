@@ -27,7 +27,40 @@
             //  屏幕坐标位置：screenX screenY
             // 修改键 ： event对象中添加了4个修改键属性 shiftKey ctrlKey altKey metaKey（windows是windows键）
             // 相关元素： 通过event对象的relatedTarget提供相关元素的信息，但是只在mouseout和mouseover的事件中有值
+            // 鼠标按钮 ： event对象里有button属性，只有mousedown，mouseup事件才有值。 0:左键 1：滚轮键 2：右键
+            // 更多事件信息：event对象中还提供detail属性，记录单击次数
+            // 滚轮事件信息：event中有wheelDelta属性，当用户向前滚的时候，它是120的倍数，向后滚的时候是-120的倍数，仅在mousewheel事件中
+            //触摸设备：不支持dbclick,单击可以单击元素（如链接或者被指定onclick事件的元素）会触发mousemove事件，如果没有发生任何变化会依次发生mousedown,mouseup,click事件。mousemove事件会触发mouseover和mouseout事件。
+    //键盘与文本事件  ： 键盘事件 keydown keypress keyup    文本事件：textInput  在文本插入文本框之前就会触发textInput事件。
+            //键码：发生keydown和keyup事件的时候，event的keyCode属性会包含一个代码，与键盘上一个特定的键对应。
+            //字符编码：event对象中的charCode属性。
+            //DOM3级变化：event中key和char属性
+            // textInput事件：event中的data属性和inputMethod属性
+    //复合事件 ：处理IME的输入序列，可以让用户输入在物理键盘上找不到的字符 compositionstart compositionupdata compositionend   有data属性
+    //变动事件 在DOM结构中发生任何变化时触发。用于XML
+    // HTML5事件
+        // 1.contextmenu事件：单击右键调用上下文菜单属性
+        //2.beforeunload事件 在浏览器卸载页面之前触发
+        //3.DOMContentLoaded事件 形成完整的DOM树就触发
+        // 4.readystatechange事件
+        //5.pageshow和pagehide事件 浏览器加载/卸载页面时触发
+        //6.hashchange事件  添加给window对象。监听url中#号后面发生变化   event有oldURL和newURL属性
 
+    /**
+     * 设备事件：1.orientationchange事件  0表示正常模式，90表示左旋转的横向模式 -90表示右旋转的横向模式。
+     *         2。MozOrienttation事件
+     *         3.deviceorientation 事件
+     *         4.devicemotion事件
+     */
+
+    /**
+     * 触摸事件：1 touchstart：当手指触摸屏幕触发。
+     *         2 touchmove：当手指在屏幕上滑动时候连续触发，发生期间可以调用preventDefault()可以组织滚动。
+     *         3 touchend 手指从屏幕上移开
+     *         4 touchcancel
+     *           在event对象里有touches targetTouchs changeTouches 属性
+     *手势事件：ios中：gesturestart事件 gesturechange事件 gestureend事件
+     */
 </script>
 </body>
 </html>
