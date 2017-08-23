@@ -35,7 +35,26 @@
                     input size指定文本框中显示的字符数 value设置初始值 maxlength最大的字符数。
                     textarea rows指定字符行数，cols指定列数。
 
-    -->
+
+           选择文本 select()  只要文本框获得焦点的时候就能直接选中文本   使用时会触发select事件
+                    selectionStart   selectionEnd   保存基数是0的数值，表示所选文本的范围
+                    setSelectionRange() 选择部分文本 接收俩个参数 ：第一个字符的索引和要选择字符的索引
+                    要看到选择的文本 必须在setSelectionRange() 之前或之后立即将焦点设置到文本框
+
+          过滤输入 ： 1 屏蔽字符： 使用keypress事件配合按键的字符编码来实现
+                   2 操作剪贴板 beforecopy 复制之前触发  copy复制的时候触发 beforecut 剪切之前触发 cut 剪切的时候触发 beforepaste 发生粘贴操作前触发 paste
+
+           自动切换焦点
+
+           HTML5约束验证API
+                1必填字段 required属性
+                2 其他输入类型 <input type="email"> <input type="url">
+                3 数值范围  number range datetime datetime-local date month week time
+                4.输入模式 pattern="\d+"  正则表达式
+                5.检测有效性 checkValidity()  validity
+                6.禁用验证  novalidate formnovalidate
+
+               -->
 
 </body>
 </html>
