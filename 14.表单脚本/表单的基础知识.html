@@ -68,9 +68,12 @@
 
          表单序列化
 
-         富文本编辑：在页面中嵌入一个包含html的空页面的iframe，通过设置designMode属性，让这个空白的页面就能被编辑,编辑的对象则是该页面body元素的html代码。
-                    另一种方式是使用contenteditable这个特殊属性，可以任何元素应用，然后用户可以编辑该元素。
-                    操作富文本：document.exeCommand().
+        富文本
+        页面中嵌入一个包含空HTML页面的iframe，通过设置frame的document.designMode属性变可编辑
+        1.使用element 的contenteditable属性 为ture直接编辑
+        2.操作富文本：使用document.execCommand()方法
+        3.富文本选区：使用iframe的getSelection（）方法
+        4.表单与富文本：通常添加一个隐藏的字段，让他的值等于从iframe中提取的HTML。
                -->
 </body>
 </html>
