@@ -54,7 +54,23 @@
                 5.检测有效性 checkValidity()  validity
                 6.禁用验证  novalidate formnovalidate
 
-               -->
+          选择框脚本
+                属性和方法: add(newOption,relOption)  multiple options remove(index) selectedIndex size
 
+                访问选中项  单项的可以使用selectIndex属性
+                          选中多项可以使用selected 将其设置为true
+
+                添加选项  DOM方法   使用Option构造函数 add()方法
+
+                移除方法  DOM的removeChild()  remove(index)
+
+                移动和重排选项  使用DOM insertBefore()方法
+
+         表单序列化
+
+         富文本编辑：在页面中嵌入一个包含html的空页面的iframe，通过设置designMode属性，让这个空白的页面就能被编辑,编辑的对象则是该页面body元素的html代码。
+                    另一种方式是使用contenteditable这个特殊属性，可以任何元素应用，然后用户可以编辑该元素。
+                    操作富文本：document.exeCommand().
+               -->
 </body>
 </html>
