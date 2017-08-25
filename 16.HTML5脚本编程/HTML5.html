@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <script>
+        // 跨文档消息传递  XDM 指的是来自不同域的页面间传递消息 核心方法是postMessage().
+          //postMessage() 接受2个参数，一个消息和一个表示消息接受方来自哪个域的字符串。 如果来源不匹配则什么也不会发生
+
+        /**
+         * 接受到XDM消息会触发window对象的message事件（异步触发），触发之后会传递给onmessage处理程序。传递的事件对象包含3个重要信息。
+         *      data 作为postMessage() 第一个参数传入的字符串数据
+         *      origin 发送消息的文档所在域."例如 'http://www.xxxx.com'"
+         *      source 发送消息的文档的window对象的代理。
+         */
+
+        // 原生拖放；  最早只有IE4引入了拖放功能，只支持文本和图像拖放。
+                    // 通过拖放事件，可以控制拖放事件的相关信息
+                    // 在拖动元素时，将依次触发 dragstart drag dragend
+                    // 当拖动完成，元素被拖动到一个有效目标上时，会依次触发 dragenter dragover dragleave或drop  \
+
+    </script>
+</body>
+</html>
