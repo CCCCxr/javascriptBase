@@ -19,8 +19,19 @@
         // 原生拖放；  最早只有IE4引入了拖放功能，只支持文本和图像拖放。
                     // 通过拖放事件，可以控制拖放事件的相关信息
                     // 在拖动元素时，将依次触发 dragstart drag dragend
-                    // 当拖动完成，元素被拖动到一个有效目标上时，会依次触发 dragenter dragover dragleave或drop  \
+                    // 当拖动完成，元素被拖动到一个有效目标上时，会依次触发 dragenter dragover dragleave或drop
 
+                    // 通过重写dragenter和dragover事件的默认行为，可以将元素设置成有效的放置元素。
+                    // dataTransfer对象 只能在拖放事件中访问，用于从被拖动元素向放置目标传递字符串格式的数据。
+                       // 主要有2个方法 getData() 和setData()  setData()接收俩个参数，第一个是各种MIME类型，这个参数也是getData()的唯一参数。第二个是要传递的数据。
+                       // 还有俩个用来确定被拖动的元素以及作为放置目标的元素能够接收什么操作的属性：dropEffect和effectAllowed.
+                    // 可拖动：默认情况下是只有图像，文本和链接可以拖动的。但是只要设置元素的draggable属性为true，就可以让他拖动。设置为false则不可以。
+                    // 其他成员：为dataTransfer添加了一些方法和属性：addElement() clearData() setDragImage() types
+        //媒体元素 <audio>和<video>  使用子元素<source>可以指定多个不同来源。
+            // 属性：src width height poster 加载视频内容期间所显示的图像， controls 显示UI控件
+            // 事件
+
+        // 历史状态管理  hashchange事件  history.pushState()   ...replaceState()
     </script>
 </body>
 </html>
