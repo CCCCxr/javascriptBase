@@ -14,8 +14,14 @@
      *      finally 子句 一经使用，其代码都会执行。
      *    错误类型：Error EvalError RangeError ReferenceError SyntaxError TypeError URLError
      *      当try-catch语句中发生错误的时候，浏览器会被认为错误已经被处理了。
-     *       throw语句：模拟报错
-     *
+     *       throw语句：模拟报错    利用原型链还可以通过继承基本的Error类型来创建自定义错误类型。
+     *    错误事件：没有通过try-catch处理的错误都会通过触发window对象的error事件。 3个参数  url liner message
+     *  常见错误类型： 类型转换错误 数据类型错误 通信错误
+     *  区分致命错误和非致命错误
+     *      致命错误：应用程序根本无法继续运行 错误明显影响到了用户的主要操作  会导致其他的连带错误
+     *      非致命错误：不影响用户的主要任务 只影响页面的一部分 可以恢复 重复相同的操作可以消除错误
+     *  把错误记录到服务器
+     *  3 调试技术
      */
         try{
             // 可能会导致错误的代码
