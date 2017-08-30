@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+
+    // 防止代码被别人意外的修改,可以自定义防篡改对象.
+
+        // 1级保护 不可扩展对象 使用Object.preventExtensions() 方法可以让对象无法进行扩展
+     var person = {name:"cxr"};
+     Object.preventExtensions(person);
+     person.age = 23;
+     console.log(person.age);  //undefined
+     console.log(person.name);  //但是已有的成员不受影响
+     console.log(Object.isExtensible(person));   //用来查看对象是否可以扩展
+
+      //  2级保护 密封的对象 密封对象不可扩展,已有成员的[[Configurable]] 特性被设置为false. 之后便不能删除属性和方法. 但是可以被修改
+    Object.seal(person);
+    person.name = "chen";
+    delete person.name;
+    console.log(person.name); //chen
+    console.log(Object.isSealed(person)); //检测对象有没有被密封.
+    // 最严格的保护  冻结对象 即不可扩展,又是密封的
+    Object.freeze(person);
+    Object.isFrozen(person); //检测对象是否冻结
+
+    // 高级计时器
+        //  定时器的工作方式：当特定时间过去后将代码插入队列
+        // 避免使用setInterval()  链式调用setTimeout(): setTimeout(function(){setTimeout(argument.callee,interval)},interval)
+    //  Yielding Processes
+
+    // 函数节流   某些代码在没有间断的情况下连续重复执行，在resize事件中常用
+
+    //自定义事件 观察者模式
+
+</script>
+</body>
+</html>

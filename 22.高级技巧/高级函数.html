@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <script>
+        /**
+         * 高级函数
+         *    安全的类型检测  在任何值上调用Object原生的toString()方法.
+         *    作用域安全的构造函数   如果没有使用new操作符来调用构造函数的话,函数内部的this对象会映射到window上.
+         *                       所以先确定this对象是正确类型的实例.
+         *
+         *    惰性载入函数   表示函数执行分支只会发生一次. 俩种实现方法
+         *                 1 函数被调用时在处理函数
+         *                 2 在声明函数时就指定适当的函数 .  创建一个匿名,自执行函数,用以确定应该使用哪一个函数实现.
+         *
+         *    函数绑定  创建一个函数,可以在特定的this环境中以指定参数调用另一个函数  bind() 原理就是保持函数的执行环境.
+         */
+        var a = [];
+        console.log(Object.prototype.toString.call(a));
+
+        // 作用域安全的构造函数
+        function Person(name,age,job){
+            if(this instanceof Person){
+                this.name = name;
+                this.age = age;
+                this.job = job;
+            }else{
+                return new Person(name,age,job);
+            }
+        }
+    </script>
+</body>
+</html>
