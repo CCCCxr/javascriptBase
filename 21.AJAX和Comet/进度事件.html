@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<form action="" id="myform">
+
+</form>
+<div class="statusDiv">
+
+</div>
+<script>
+    /**
+     *  进度事件  目前有6个
+     *          loadstart 接收到第一个响应数据的字节时触发
+     *          progress 在接收响应期间持续不断的触发
+     *          error 在请求出错的时候触发
+     *          abort 在因为调用abort()方法而终止连接时触发
+     *          load 在接收到完整的响应数据时触发
+     *          loadend 在通信完成或触发 error abort load时触发
+     *
+     *  load事件 用于代替readystatechange . onload事件处理程序会接收到一个event对象,其target属性就指向XHR对象实例
+     *  progress 事件 根据接收新数据期间周期触发. onprogerss事件处理程序也有一个event对象,target属性指向XHR对象.
+     *           但包含额外的3个属性:lengthComputable 表示进度信息是否可用的布尔值 position 已接收的字节数 totalSize 表示根据Content-length响应头部确定的预期字节数
+     *
+     */
+
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function(event){
+        if((xhr.status >= 200 && xhr.status < 300)||xhr.status == 304){
+            console.log(xhr.responseText);
+        } else {
+            console.log(xhr.status);
+        }
+    };
+    // 可用progress事件创建一个进度指示器
+    xhr.onprogress = function(event){
+        var divStatus = document.querySelector(".statusDiv");
+        if(event.lengthComputable){
+            divStatus.innerHTML = "Received" + event.position + "of" + event.totalSize + "bytss";
+        }
+    };
+
+    xhr.open();
+    xhr.send();
+</script>
+</body>
+</html>

@@ -5,9 +5,42 @@
     <title></title>
 </head>
 <body>
+<form action="" id="myform">
+    <input type="text" name="user"/>
+    <input type="password" name="password"/>
+    <input type="submit" value="提交" class="submit"/>
+</form>
 <script>
      // 对XMLHttpRequest一级进行了扩展.
-     // FormData 表单序列化
+     // FormData类型  将表单序列化以及创建用于XHR传输的数据.
+     //    append()   也可以直接填写表单元素 var data =  new FormData
+     /**
+      *  超时设定 timeout属性,表示请求在等待响应多少毫秒之后就终止.
+      *  设置了数值之后如果浏览器没有在规定的时间收到响应,就会触发timeout事件,然后调用ontimeout事件处理程序
+      */
+
+    //overrideMimeType()方法  重写XHR响应的MIME类型  要在send()之前调用
+     var sub = document.querySelector(".submit");
+     sub.addEventListener("click",function(){
+         var xhr = new XMLHttpRequest();
+         var form = document.querySelector("#myform");
+         var data = new FormData(form);
+         xhr.onreadystatechange = function(){
+             if(xhr.readyState == 4){
+                 if((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304){
+                     console.log(xhr.responseText);
+                 } else {
+                     console.log("出错,状态码为"+xhr.status);
+                 }
+             }
+         };
+         xhr.open("get","exp.php","true");
+         xhr.overrideMimeType('text/xml');  // 修改响应类型.
+         xhr.send(data);
+
+         return false;
+     },false);
+
 </script>
 </body>
 </html>
