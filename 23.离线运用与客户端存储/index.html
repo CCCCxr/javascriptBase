@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    // 离线运用与客户端存储
+
+       // 1.离线检测 通过navigator.onLine 来检测用户是否有打开网络   还定义了俩个事件:online offline 在window对象上触发
+       // 2.应用缓存 appcache  使用一个描述文件,列出要下载和缓存的资源 在html标签中使用 <html manifest="/offline.manifest"> 可以通过applicationCache对象来知道它在做什么.
+       // 3.数据存储  cookie
+            //    限制
+            //    cookie的构成   名称  值   域   路径  失效时间    安全标志
+            //    JavaScript中的cookie   document.cookie来访问 
+
+            // IE用户数据 <div style="behavior:url(#default#userData)" id="dataStore"></div>
+                // 通过setAttribute()来设置存储数据 save()来保存并保存到数据空间的名字 load()来获取数据空间 getAttribute()来读取数据
+            // web存储机制  Storage类型  clear()  getItem(name) key(index) removeItem(name) setItem(name,value)
+
+              // sessionStorage 对象 会话级存储 是Storage的实例,所以可以直接调用以上的方法  也可以直接设置新的属性来存储数据
+              // globalStorage  使用时候要指定哪些域能访. globalStorage[xxx.com].name = "cxr";  这样存储的数据只有xxx.com的域名能访问
+              // localStorage  无需设置访问规则,如果要访问同一个localStorage对象,页面必须来自同一个域名.也可以直接调用Storage类型的方法
+
+                //storage事件 只要对storage对象进行修改就会触发storage事件
+        // 4.IndexDB   与mysql类似的数据库 只不过存储方式使用对象存储
+
+
+
+</script>
+</body>
+</html>
