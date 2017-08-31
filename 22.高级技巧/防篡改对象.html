@@ -5,6 +5,9 @@
     <title></title>
 </head>
 <body>
+<div style="background: black;width: 500px;height: 500px;position: absolute" id="mydiv">
+
+</div>
 <script>
 
     // 防止代码被别人意外的修改,可以自定义防篡改对象.
@@ -34,7 +37,16 @@
 
     // 函数节流   某些代码在没有间断的情况下连续重复执行，在resize事件中常用
 
-    //自定义事件  事件是一种叫做观察者的设计模式  由主体和观察者俩个部分组成
+    //自定义事件  事件是一种叫做观察者的设计模式  由主体和观察者俩个部分组成 主体负责发布事件,同事观察者通过订阅这些事件来观察该主体.
+    //   概念:创建一个管理事件的对象,让其他对象监听那些事件.
+
+    //拖放  概念:点击某个对象,并按住鼠标不放,然后将其移到另一个区域,然后释放鼠标按钮将对象"放"在这里.
+
+    document.addEventListener("mousemove",function(event){
+        var div = document.querySelector("#mydiv");
+        div.style.left = event.clientX + "px";
+        div.style.top = event.clientY + "px";
+    },false);
 
 </script>
 </body>
